@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -28,6 +29,9 @@ from acapy_wrapper.models.v10_presentation_proposal_request import V10Presentati
 from acapy_wrapper.models.v10_presentation_send_request_request import V10PresentationSendRequestRequest
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -40,12 +44,23 @@ router = APIRouter()
     summary="Creates a presentation request not bound to any proposal or connection",
 )
 async def present_proof_create_request_post(
+    request: Request,
     body: V10PresentationCreateRequestRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -57,6 +72,7 @@ async def present_proof_create_request_post(
     summary="Fetch all present-proof exchange records",
 )
 async def present_proof_records_get(
+    request: Request,
     connection_id: str = Query(None, description="Connection identifier"),
     role: str = Query(None, description="Role assigned in presentation exchange"),
     state: str = Query(None, description="Presentation exchange state"),
@@ -65,7 +81,17 @@ async def present_proof_records_get(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchangeList:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -77,6 +103,7 @@ async def present_proof_records_get(
     summary="Fetch credentials for a presentation request from wallet",
 )
 async def present_proof_records_pres_ex_id_credentials_get(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     count: str = Query(None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"),
     extra_query: str = Query(None, description="(JSON) dict mapping referents to extra WQL queries", regex=r"^{\s*&quot;.*?&quot;\s*:\s*{.*?}\s*(,\s*&quot;.*?&quot;\s*:\s*{.*?}\s*)*\s*}$"),
@@ -86,7 +113,17 @@ async def present_proof_records_pres_ex_id_credentials_get(
         get_token_AuthorizationHeader
     ),
 ) -> List[IndyCredPrecis]:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.delete(
@@ -98,12 +135,23 @@ async def present_proof_records_pres_ex_id_credentials_get(
     summary="Remove an existing presentation exchange record",
 )
 async def present_proof_records_pres_ex_id_delete(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -115,12 +163,23 @@ async def present_proof_records_pres_ex_id_delete(
     summary="Fetch a single presentation exchange record",
 )
 async def present_proof_records_pres_ex_id_get(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -132,13 +191,24 @@ async def present_proof_records_pres_ex_id_get(
     summary="Send a problem report for presentation exchange",
 )
 async def present_proof_records_pres_ex_id_problem_report_post(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     body: V10PresentationProblemReportRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -150,13 +220,24 @@ async def present_proof_records_pres_ex_id_problem_report_post(
     summary="Sends a proof presentation",
 )
 async def present_proof_records_pres_ex_id_send_presentation_post(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     body: IndyPresSpec = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -168,13 +249,24 @@ async def present_proof_records_pres_ex_id_send_presentation_post(
     summary="Sends a presentation request in reference to a proposal",
 )
 async def present_proof_records_pres_ex_id_send_request_post(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     body: AdminAPIMessageTracing = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -186,12 +278,23 @@ async def present_proof_records_pres_ex_id_send_request_post(
     summary="Verify a received presentation",
 )
 async def present_proof_records_pres_ex_id_verify_presentation_post(
+    request: Request,
     pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -203,12 +306,23 @@ async def present_proof_records_pres_ex_id_verify_presentation_post(
     summary="Sends a presentation proposal",
 )
 async def present_proof_send_proposal_post(
+    request: Request,
     body: V10PresentationProposalRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -220,9 +334,20 @@ async def present_proof_send_proposal_post(
     summary="Sends a free presentation request not bound to any proposal",
 )
 async def present_proof_send_request_post(
+    request: Request,
     body: V10PresentationSendRequestRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> V10PresentationExchange:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

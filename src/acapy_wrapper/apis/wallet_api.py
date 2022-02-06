@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -24,6 +25,9 @@ from acapy_wrapper.models.did_list import DIDList
 from acapy_wrapper.models.did_result import DIDResult
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -36,12 +40,23 @@ router = APIRouter()
     summary="Create a local DID",
 )
 async def wallet_did_create_post(
+    request: Request,
     body: DIDCreate = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> DIDResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -53,6 +68,7 @@ async def wallet_did_create_post(
     summary="List wallet DIDs",
 )
 async def wallet_did_get(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^did:key:z[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+$|^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     key_type: str = Query(None, description="Key type to query for."),
     method: str = Query(None, description="DID method to query for. e.g. sov to only fetch indy/sov DIDs"),
@@ -62,7 +78,17 @@ async def wallet_did_get(
         get_token_AuthorizationHeader
     ),
 ) -> DIDList:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.patch(
@@ -74,12 +100,23 @@ async def wallet_did_get(
     summary="Rotate keypair for a DID not posted to the ledger",
 )
 async def wallet_did_local_rotate_keypair_patch(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -91,11 +128,22 @@ async def wallet_did_local_rotate_keypair_patch(
     summary="Fetch the current public DID",
 )
 async def wallet_did_public_get(
+    request: Request,
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> DIDResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -107,12 +155,23 @@ async def wallet_did_public_get(
     summary="Assign the current public DID",
 )
 async def wallet_did_public_post(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> DIDResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -124,12 +183,23 @@ async def wallet_did_public_post(
     summary="Query DID endpoint in wallet",
 )
 async def wallet_get_did_endpoint_get(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> DIDEndpoint:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -141,9 +211,20 @@ async def wallet_get_did_endpoint_get(
     summary="Update endpoint in wallet and on ledger if posted to it",
 )
 async def wallet_set_did_endpoint_post(
+    request: Request,
     body: DIDEndpointWithType = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

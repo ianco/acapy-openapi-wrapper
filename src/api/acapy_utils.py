@@ -9,3 +9,4 @@ async def acapy_admin_request(
         tenant: bool = False,
     ) -> str:
     print(">>> called it!!!", method, path, data)
+    return {"status": "ok"}

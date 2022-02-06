@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -24,6 +25,9 @@ from acapy_wrapper.models.transaction_list import TransactionList
 from acapy_wrapper.models.transaction_record import TransactionRecord
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -36,12 +40,23 @@ router = APIRouter()
     summary="For Author to resend a particular transaction request",
 )
 async def transaction_tran_id_resend_post(
+    request: Request,
     tran_id: str = Path(None, description="Transaction identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -53,6 +68,7 @@ async def transaction_tran_id_resend_post(
     summary="Set Endorser Info",
 )
 async def transactions_conn_id_set_endorser_info_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     endorser_did: str = Query(None, description="Endorser DID"),
     endorser_name: str = Query(None, description="Endorser Name"),
@@ -60,7 +76,17 @@ async def transactions_conn_id_set_endorser_info_post(
         get_token_AuthorizationHeader
     ),
 ) -> EndorserInfo:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -72,13 +98,24 @@ async def transactions_conn_id_set_endorser_info_post(
     summary="Set transaction jobs",
 )
 async def transactions_conn_id_set_endorser_role_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     transaction_my_job: str = Query(None, description="Transaction related jobs"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionJobs:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -90,6 +127,7 @@ async def transactions_conn_id_set_endorser_role_post(
     summary="For author to send a transaction request",
 )
 async def transactions_create_request_post(
+    request: Request,
     tran_id: str = Query(None, description="Transaction identifier"),
     endorser_write_txn: bool = Query(None, description="Endorser will write the transaction after endorsing it"),
     body: Date = Body(None, description=""),
@@ -97,7 +135,17 @@ async def transactions_create_request_post(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -109,11 +157,22 @@ async def transactions_create_request_post(
     summary="Query transactions",
 )
 async def transactions_get(
+    request: Request,
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionList:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -125,12 +184,23 @@ async def transactions_get(
     summary="For Author to cancel a particular transaction request",
 )
 async def transactions_tran_id_cancel_post(
+    request: Request,
     tran_id: str = Path(None, description="Transaction identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -142,12 +212,23 @@ async def transactions_tran_id_cancel_post(
     summary="For Endorser to endorse a particular transaction record",
 )
 async def transactions_tran_id_endorse_post(
+    request: Request,
     tran_id: str = Path(None, description="Transaction identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -159,12 +240,23 @@ async def transactions_tran_id_endorse_post(
     summary="Fetch a single transaction record",
 )
 async def transactions_tran_id_get(
+    request: Request,
     tran_id: str = Path(None, description="Transaction identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -176,12 +268,23 @@ async def transactions_tran_id_get(
     summary="For Endorser to refuse a particular transaction record",
 )
 async def transactions_tran_id_refuse_post(
+    request: Request,
     tran_id: str = Path(None, description="Transaction identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -193,9 +296,20 @@ async def transactions_tran_id_refuse_post(
     summary="For Author / Endorser to write an endorsed transaction to the ledger",
 )
 async def transactions_tran_id_write_post(
+    request: Request,
     tran_id: str = Path(None, description="Transaction identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TransactionRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

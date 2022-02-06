@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -27,6 +28,9 @@ from acapy_wrapper.models.wallet_list import WalletList
 from acapy_wrapper.models.wallet_record import WalletRecord
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -39,12 +43,23 @@ router = APIRouter()
     summary="Create a subwallet",
 )
 async def multitenancy_wallet_post(
+    request: Request,
     body: CreateWalletRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> CreateWalletResponse:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -56,12 +71,23 @@ async def multitenancy_wallet_post(
     summary="Get a single subwallet",
 )
 async def multitenancy_wallet_wallet_id_get(
+    request: Request,
     wallet_id: str = Path(None, description="Subwallet identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> WalletRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.put(
@@ -73,13 +99,24 @@ async def multitenancy_wallet_wallet_id_get(
     summary="Update a subwallet",
 )
 async def multitenancy_wallet_wallet_id_put(
+    request: Request,
     wallet_id: str = Path(None, description="Subwallet identifier"),
     body: UpdateWalletRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> WalletRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -91,13 +128,24 @@ async def multitenancy_wallet_wallet_id_put(
     summary="Remove a subwallet",
 )
 async def multitenancy_wallet_wallet_id_remove_post(
+    request: Request,
     wallet_id: str = Path(None, description="Subwallet identifier"),
     body: RemoveWalletRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -109,13 +157,24 @@ async def multitenancy_wallet_wallet_id_remove_post(
     summary="Get auth token for a subwallet",
 )
 async def multitenancy_wallet_wallet_id_token_post(
+    request: Request,
     wallet_id: str = Path(None, description=""),
     body: CreateWalletTokenRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> CreateWalletTokenResponse:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -127,9 +186,20 @@ async def multitenancy_wallet_wallet_id_token_post(
     summary="Query subwallets",
 )
 async def multitenancy_wallets_get(
+    request: Request,
     wallet_name: str = Query(None, description="Wallet name"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> WalletList:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

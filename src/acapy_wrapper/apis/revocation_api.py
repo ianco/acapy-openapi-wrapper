@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -30,6 +31,9 @@ from acapy_wrapper.models.txn_or_publish_revocations_result import TxnOrPublishR
 from acapy_wrapper.models.txn_or_rev_reg_result import TxnOrRevRegResult
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -42,12 +46,23 @@ router = APIRouter()
     summary="Get current active revocation registry by credential definition id",
 )
 async def revocation_active_registry_cred_def_id_get(
+    request: Request,
     cred_def_id: str = Path(None, description="Credential definition identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -59,12 +74,23 @@ async def revocation_active_registry_cred_def_id_get(
     summary="Clear pending revocations",
 )
 async def revocation_clear_pending_revocations_post(
+    request: Request,
     body: ClearPendingRevocationsRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> PublishRevocations:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -76,12 +102,23 @@ async def revocation_clear_pending_revocations_post(
     summary="Creates a new revocation registry",
 )
 async def revocation_create_registry_post(
+    request: Request,
     body: RevRegCreateRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -93,6 +130,7 @@ async def revocation_create_registry_post(
     summary="Get credential revocation status",
 )
 async def revocation_credential_record_get(
+    request: Request,
     cred_ex_id: str = Query(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
     cred_rev_id: str = Query(None, description="Credential revocation identifier", regex=r"^[1-9][0-9]*$"),
     rev_reg_id: str = Query(None, description="Revocation registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
@@ -100,7 +138,17 @@ async def revocation_credential_record_get(
         get_token_AuthorizationHeader
     ),
 ) -> CredRevRecordResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -112,12 +160,23 @@ async def revocation_credential_record_get(
     summary="Publish pending revocations to ledger",
 )
 async def revocation_publish_revocations_post(
+    request: Request,
     body: PublishRevocations = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TxnOrPublishRevocationsResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -129,13 +188,24 @@ async def revocation_publish_revocations_post(
     summary="Search for matching revocation registries that current agent created",
 )
 async def revocation_registries_created_get(
+    request: Request,
     cred_def_id: str = Query(None, description="Credential definition identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$"),
     state: str = Query(None, description="Revocation registry state"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegsCreated:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -147,6 +217,7 @@ async def revocation_registries_created_get(
     summary="Send revocation registry definition to ledger",
 )
 async def revocation_registry_rev_reg_id_definition_post(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     conn_id: str = Query(None, description="Connection identifier"),
     create_transaction_for_endorser: bool = Query(None, description="Create Transaction For Endorser&#39;s signature"),
@@ -154,7 +225,17 @@ async def revocation_registry_rev_reg_id_definition_post(
         get_token_AuthorizationHeader
     ),
 ) -> TxnOrRevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -166,6 +247,7 @@ async def revocation_registry_rev_reg_id_definition_post(
     summary="Send revocation registry entry to ledger",
 )
 async def revocation_registry_rev_reg_id_entry_post(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     conn_id: str = Query(None, description="Connection identifier"),
     create_transaction_for_endorser: bool = Query(None, description="Create Transaction For Endorser&#39;s signature"),
@@ -173,7 +255,17 @@ async def revocation_registry_rev_reg_id_entry_post(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -185,12 +277,23 @@ async def revocation_registry_rev_reg_id_entry_post(
     summary="Get revocation registry by revocation registry id",
 )
 async def revocation_registry_rev_reg_id_get(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -202,12 +305,23 @@ async def revocation_registry_rev_reg_id_get(
     summary="Get number of credentials issued against revocation registry",
 )
 async def revocation_registry_rev_reg_id_issued_get(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegIssuedResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.patch(
@@ -219,13 +333,24 @@ async def revocation_registry_rev_reg_id_issued_get(
     summary="Update revocation registry with new public URI to its tails file",
 )
 async def revocation_registry_rev_reg_id_patch(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     body: RevRegUpdateTailsFileUri = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.patch(
@@ -237,13 +362,24 @@ async def revocation_registry_rev_reg_id_patch(
     summary="Set revocation registry state manually",
 )
 async def revocation_registry_rev_reg_id_set_state_patch(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     state: str = Query(None, description="Revocation registry state to set"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> RevRegResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 """
@@ -273,12 +409,23 @@ async def revocation_registry_rev_reg_id_tails_file_get(
     summary="Upload local tails file to server",
 )
 async def revocation_registry_rev_reg_id_tails_file_put(
+    request: Request,
     rev_reg_id: str = Path(None, description="Revocation Registry identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -290,9 +437,20 @@ async def revocation_registry_rev_reg_id_tails_file_put(
     summary="Revoke an issued credential",
 )
 async def revocation_revoke_post(
+    request: Request,
     body: RevokeRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

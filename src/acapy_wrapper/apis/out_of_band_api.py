@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -22,6 +23,9 @@ from acapy_wrapper.models.invitation_create_request import InvitationCreateReque
 from acapy_wrapper.models.invitation_message import InvitationMessage
 from acapy_wrapper.models.invitation_record import InvitationRecord
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
+
+from api import acapy_utils as au
+
 
 router = APIRouter()
 
@@ -35,6 +39,7 @@ router = APIRouter()
     summary="Create a new connection invitation",
 )
 async def out_of_band_create_invitation_post(
+    request: Request,
     auto_accept: bool = Query(None, description="Auto-accept connection (defaults to configuration)"),
     multi_use: bool = Query(None, description="Create invitation for multiple use (default false)"),
     body: InvitationCreateRequest = Body(None, description=""),
@@ -42,7 +47,17 @@ async def out_of_band_create_invitation_post(
         get_token_AuthorizationHeader
     ),
 ) -> InvitationRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -54,6 +69,7 @@ async def out_of_band_create_invitation_post(
     summary="Receive a new connection invitation",
 )
 async def out_of_band_receive_invitation_post(
+    request: Request,
     alias: str = Query(None, description="Alias for connection"),
     auto_accept: bool = Query(None, description="Auto-accept connection (defaults to configuration)"),
     mediation_id: str = Query(None, description="Identifier for active mediation record to be used", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
@@ -63,4 +79,14 @@ async def out_of_band_receive_invitation_post(
         get_token_AuthorizationHeader
     ),
 ) -> ConnRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

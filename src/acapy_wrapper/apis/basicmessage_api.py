@@ -53,3 +53,4 @@ async def connections_conn_id_send_message_post(
         headers=None,
         tenant=True,
     )
+    return resp_text

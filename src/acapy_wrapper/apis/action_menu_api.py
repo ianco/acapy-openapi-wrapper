@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -21,6 +22,9 @@ from acapy_wrapper.models.action_menu_fetch_result import ActionMenuFetchResult
 from acapy_wrapper.models.perform_request import PerformRequest
 from acapy_wrapper.models.send_menu import SendMenu
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
+
+from api import acapy_utils as au
+
 
 router = APIRouter()
 
@@ -34,12 +38,23 @@ router = APIRouter()
     summary="Close the active menu associated with a connection",
 )
 async def action_menu_conn_id_close_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -51,12 +66,23 @@ async def action_menu_conn_id_close_post(
     summary="Fetch the active menu",
 )
 async def action_menu_conn_id_fetch_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> ActionMenuFetchResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -68,13 +94,24 @@ async def action_menu_conn_id_fetch_post(
     summary="Perform an action associated with the active menu",
 )
 async def action_menu_conn_id_perform_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     body: PerformRequest = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -86,12 +123,23 @@ async def action_menu_conn_id_perform_post(
     summary="Request the active menu",
 )
 async def action_menu_conn_id_request_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -103,10 +151,21 @@ async def action_menu_conn_id_request_post(
     summary="Send an action menu to a connection",
 )
 async def action_menu_conn_id_send_menu_post(
+    request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     body: SendMenu = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

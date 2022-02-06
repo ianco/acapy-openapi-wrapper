@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -26,6 +27,9 @@ from acapy_wrapper.models.vc_record_list import VCRecordList
 from acapy_wrapper.models.w3_c_credentials_list_request import W3CCredentialsListRequest
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -38,12 +42,23 @@ router = APIRouter()
     summary="Remove credential from wallet by id",
 )
 async def credential_credential_id_delete(
+    request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -55,12 +70,23 @@ async def credential_credential_id_delete(
     summary="Fetch credential from wallet by id",
 )
 async def credential_credential_id_get(
+    request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> IndyCredInfo:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -72,12 +98,23 @@ async def credential_credential_id_get(
     summary="Get attribute MIME types from wallet",
 )
 async def credential_mime_types_credential_id_get(
+    request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> AttributeMimeTypesResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -89,6 +126,7 @@ async def credential_mime_types_credential_id_get(
     summary="Query credential revocation status by id",
 )
 async def credential_revoked_credential_id_get(
+    request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
     _from: str = Query(None, description="Earliest epoch of revocation status interval of interest", regex=r"^[0-9]*$"),
     to: str = Query(None, description="Latest epoch of revocation status interval of interest", regex=r"^[0-9]*$"),
@@ -96,7 +134,17 @@ async def credential_revoked_credential_id_get(
         get_token_AuthorizationHeader
     ),
 ) -> CredRevokedResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.delete(
@@ -108,12 +156,23 @@ async def credential_revoked_credential_id_get(
     summary="Remove W3C credential from wallet by id",
 )
 async def credential_w3c_credential_id_delete(
+    request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -125,12 +184,23 @@ async def credential_w3c_credential_id_delete(
     summary="Fetch W3C credential from wallet by id",
 )
 async def credential_w3c_credential_id_get(
+    request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> VCRecord:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -142,6 +212,7 @@ async def credential_w3c_credential_id_get(
     summary="Fetch credentials from wallet",
 )
 async def credentials_get(
+    request: Request,
     count: str = Query(None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"),
     start: str = Query(None, description="Start index", regex=r"^[0-9]*$"),
     wql: str = Query(None, description="(JSON) WQL query", regex=r"^{.*}$"),
@@ -149,7 +220,17 @@ async def credentials_get(
         get_token_AuthorizationHeader
     ),
 ) -> CredInfoList:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -161,6 +242,7 @@ async def credentials_get(
     summary="Fetch W3C credentials from wallet",
 )
 async def credentials_w3c_post(
+    request: Request,
     count: str = Query(None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"),
     start: str = Query(None, description="Start index", regex=r"^[0-9]*$"),
     wql: str = Query(None, description="(JSON) WQL query", regex=r"^{.*}$"),
@@ -169,4 +251,14 @@ async def credentials_w3c_post(
         get_token_AuthorizationHeader
     ),
 ) -> VCRecordList:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

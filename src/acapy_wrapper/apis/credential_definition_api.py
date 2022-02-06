@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -22,6 +23,9 @@ from acapy_wrapper.models.credential_definition_send_request import CredentialDe
 from acapy_wrapper.models.credential_definitions_created_result import CredentialDefinitionsCreatedResult
 from acapy_wrapper.models.txn_or_credential_definition_send_result import TxnOrCredentialDefinitionSendResult
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
+
+from api import acapy_utils as au
+
 
 router = APIRouter()
 
@@ -35,6 +39,7 @@ router = APIRouter()
     summary="Search for matching credential definitions that agent originated",
 )
 async def credential_definitions_created_get(
+    request: Request,
     cred_def_id: str = Query(None, description="Credential definition id", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$"),
     issuer_did: str = Query(None, description="Issuer DID", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     schema_id: str = Query(None, description="Schema identifier", regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$"),
@@ -45,7 +50,17 @@ async def credential_definitions_created_get(
         get_token_AuthorizationHeader
     ),
 ) -> CredentialDefinitionsCreatedResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -57,12 +72,23 @@ async def credential_definitions_created_get(
     summary="Gets a credential definition from the ledger",
 )
 async def credential_definitions_cred_def_id_get(
+    request: Request,
     cred_def_id: str = Path(None, description="Credential definition identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> CredentialDefinitionGetResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -74,12 +100,23 @@ async def credential_definitions_cred_def_id_get(
     summary="Writes a credential definition non-secret record to the wallet",
 )
 async def credential_definitions_cred_def_id_write_record_post(
+    request: Request,
     cred_def_id: str = Path(None, description="Credential definition identifier", regex=r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> CredentialDefinitionGetResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -91,6 +128,7 @@ async def credential_definitions_cred_def_id_write_record_post(
     summary="Sends a credential definition to the ledger",
 )
 async def credential_definitions_post(
+    request: Request,
     conn_id: str = Query(None, description="Connection identifier"),
     create_transaction_for_endorser: bool = Query(None, description="Create Transaction For Endorser&#39;s signature"),
     body: CredentialDefinitionSendRequest = Body(None, description=""),
@@ -98,4 +136,14 @@ async def credential_definitions_post(
         get_token_AuthorizationHeader
     ),
 ) -> TxnOrCredentialDefinitionSendResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text

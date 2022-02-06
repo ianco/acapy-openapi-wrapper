@@ -11,6 +11,7 @@ from fastapi import (  # noqa: F401
     Header,
     Path,
     Query,
+    Request,
     Response,
     Security,
     status,
@@ -25,6 +26,9 @@ from acapy_wrapper.models.taa_accept import TAAAccept
 from acapy_wrapper.models.taa_result import TAAResult
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
+from api import acapy_utils as au
+
+
 router = APIRouter()
 
 
@@ -37,13 +41,24 @@ router = APIRouter()
     summary="Get the endpoint for a DID from the ledger.",
 )
 async def ledger_did_endpoint_get(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     endpoint_type: str = Query(None, description="Endpoint type of interest (default &#39;Endpoint&#39;)"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> GetDIDEndpointResponse:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -55,12 +70,23 @@ async def ledger_did_endpoint_get(
     summary="Get the verkey for a DID from the ledger.",
 )
 async def ledger_did_verkey_get(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> GetDIDVerkeyResponse:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -72,12 +98,23 @@ async def ledger_did_verkey_get(
     summary="Get the role from the NYM registration of a public DID.",
 )
 async def ledger_get_nym_role_get(
+    request: Request,
     did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> GetNymRoleResponse:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -89,6 +126,7 @@ async def ledger_get_nym_role_get(
     summary="Send a NYM registration to the ledger.",
 )
 async def ledger_register_nym_post(
+    request: Request,
     did: str = Query(None, description="DID to register", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
     verkey: str = Query(None, description="Verification key", regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$"),
     alias: str = Query(None, description="Alias"),
@@ -97,7 +135,17 @@ async def ledger_register_nym_post(
         get_token_AuthorizationHeader
     ),
 ) -> RegisterLedgerNymResponse:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.patch(
@@ -109,11 +157,22 @@ async def ledger_register_nym_post(
     summary="Rotate key pair for public DID.",
 )
 async def ledger_rotate_public_did_keypair_patch(
+    request: Request,
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.post(
@@ -125,12 +184,23 @@ async def ledger_rotate_public_did_keypair_patch(
     summary="Accept the transaction author agreement",
 )
 async def ledger_taa_accept_post(
+    request: Request,
     body: TAAAccept = Body(None, description=""),
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> dict:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
 
 
 @router.get(
@@ -142,8 +212,19 @@ async def ledger_taa_accept_post(
     summary="Fetch the current transaction author agreement, if any",
 )
 async def ledger_taa_get(
+    request: Request,
     token_AuthorizationHeader: TokenModel = Security(
         get_token_AuthorizationHeader
     ),
 ) -> TAAResult:
-    ...
+    body = await request.body()
+    resp_text = await au.acapy_admin_request(
+        request.method,
+        request.url.path,
+        data=body,
+        text=True,
+        params=request.query_params,
+        headers=None,
+        tenant=True,
+    )
+    return resp_text
