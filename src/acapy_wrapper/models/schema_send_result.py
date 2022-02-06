@@ -35,7 +35,11 @@ class SchemaSendResult(BaseModel):
 
     @validator("schema_id")
     def schema_id_pattern(cls, value):
-        assert value is not None and re.match(r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$", value)
+        assert value is not None and re.match(
+            r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$",
+            value,
+        )
         return value
+
 
 SchemaSendResult.update_forward_refs()

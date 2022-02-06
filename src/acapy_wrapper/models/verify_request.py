@@ -24,4 +24,5 @@ class VerifyRequest(BaseModel):
     doc: SignedDoc
     verkey: Optional[str] = None
 
+
 VerifyRequest.update_forward_refs()

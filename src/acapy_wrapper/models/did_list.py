@@ -22,4 +22,5 @@ class DIDList(BaseModel):
 
     results: Optional[List[DID]] = None
 
+
 DIDList.update_forward_refs()

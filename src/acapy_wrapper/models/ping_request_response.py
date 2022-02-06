@@ -21,4 +21,5 @@ class PingRequestResponse(BaseModel):
 
     thread_id: Optional[str] = None
 
+
 PingRequestResponse.update_forward_refs()

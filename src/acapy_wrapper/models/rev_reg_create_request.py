@@ -25,7 +25,10 @@ class RevRegCreateRequest(BaseModel):
 
     @validator("credential_definition_id")
     def credential_definition_id_pattern(cls, value):
-        assert value is not None and re.match(r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$", value)
+        assert value is not None and re.match(
+            r"^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$",
+            value,
+        )
         return value
 
     @validator("max_cred_num")
@@ -37,5 +40,6 @@ class RevRegCreateRequest(BaseModel):
     def max_cred_num_min(cls, value):
         assert value >= 4
         return value
+
 
 RevRegCreateRequest.update_forward_refs()

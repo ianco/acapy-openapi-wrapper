@@ -22,4 +22,5 @@ class ActionMenuFetchResult(BaseModel):
 
     result: Optional[Menu] = None
 
+
 ActionMenuFetchResult.update_forward_refs()

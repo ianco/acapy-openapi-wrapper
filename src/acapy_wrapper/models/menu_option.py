@@ -30,4 +30,5 @@ class MenuOption(BaseModel):
     name: str
     title: str
 
+
 MenuOption.update_forward_refs()

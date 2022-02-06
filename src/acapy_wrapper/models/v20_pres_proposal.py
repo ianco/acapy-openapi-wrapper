@@ -31,4 +31,5 @@ class V20PresProposal(BaseModel):
     formats: List[V20PresFormat]
     proposalsattach: List[AttachDecorator]
 
+
 V20PresProposal.update_forward_refs()

@@ -26,4 +26,5 @@ class InvitationResult(BaseModel):
     invitation: Optional[ConnectionInvitation] = None
     invitation_url: Optional[str] = None
 
+
 InvitationResult.update_forward_refs()

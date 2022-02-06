@@ -21,4 +21,5 @@ class AdminAPIMessageTracing(BaseModel):
 
     trace: Optional[bool] = None
 
+
 AdminAPIMessageTracing.update_forward_refs()

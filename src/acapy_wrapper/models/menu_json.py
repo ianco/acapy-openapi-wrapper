@@ -28,4 +28,5 @@ class MenuJson(BaseModel):
     options: List[MenuOption]
     title: Optional[str] = None
 
+
 MenuJson.update_forward_refs()

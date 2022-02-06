@@ -43,9 +43,7 @@ router = APIRouter()
 async def features_get(
     request: Request,
     query: str = Query(None, description="Query"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> QueryResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -70,9 +68,7 @@ async def features_get(
 )
 async def plugins_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> AdminModules:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -97,9 +93,7 @@ async def plugins_get(
 )
 async def shutdown_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -124,9 +118,7 @@ async def shutdown_get(
 )
 async def status_config_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> AdminConfig:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -151,9 +143,7 @@ async def status_config_get(
 )
 async def status_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> AdminStatus:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -178,9 +168,7 @@ async def status_get(
 )
 async def status_live_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> AdminStatusLiveliness:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -205,9 +193,7 @@ async def status_live_get(
 )
 async def status_ready_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> AdminStatusReadiness:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -232,9 +218,7 @@ async def status_ready_get(
 )
 async def status_reset_post(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

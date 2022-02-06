@@ -22,4 +22,5 @@ class V20CredExRecordListResult(BaseModel):
 
     results: Optional[List[V20CredExRecordDetail]] = None
 
+
 V20CredExRecordListResult.update_forward_refs()

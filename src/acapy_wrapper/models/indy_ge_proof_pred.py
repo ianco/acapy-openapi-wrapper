@@ -25,4 +25,5 @@ class IndyGEProofPred(BaseModel):
     p_type: Optional[str] = None
     value: Optional[int] = None
 
+
 IndyGEProofPred.update_forward_refs()

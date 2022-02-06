@@ -26,4 +26,5 @@ class V10PresentationCreateRequestRequest(BaseModel):
     proof_request: IndyProofRequest
     trace: Optional[bool] = None
 
+
 V10PresentationCreateRequestRequest.update_forward_refs()

@@ -21,4 +21,5 @@ class V20CredStoreRequest(BaseModel):
 
     credential_id: Optional[str] = None
 
+
 V20CredStoreRequest.update_forward_refs()

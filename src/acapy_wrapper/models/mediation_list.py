@@ -22,4 +22,5 @@ class MediationList(BaseModel):
 
     results: Optional[List[MediationRecord]] = None
 
+
 MediationList.update_forward_refs()

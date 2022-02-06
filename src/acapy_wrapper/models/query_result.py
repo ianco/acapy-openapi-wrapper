@@ -21,4 +21,5 @@ class QueryResult(BaseModel):
 
     results: Optional[Dict[str, Any]] = None
 
+
 QueryResult.update_forward_refs()

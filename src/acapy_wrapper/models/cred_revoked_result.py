@@ -21,4 +21,5 @@ class CredRevokedResult(BaseModel):
 
     revoked: Optional[bool] = None
 
+
 CredRevokedResult.update_forward_refs()

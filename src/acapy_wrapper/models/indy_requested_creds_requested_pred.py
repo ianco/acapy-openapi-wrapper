@@ -33,4 +33,5 @@ class IndyRequestedCredsRequestedPred(BaseModel):
         assert value >= 0
         return value
 
+
 IndyRequestedCredsRequestedPred.update_forward_refs()

@@ -37,4 +37,5 @@ class W3CCredentialsListRequest(BaseModel):
     tag_query: Optional[Dict[str, str]] = None
     types: Optional[List[str]] = None
 
+
 W3CCredentialsListRequest.update_forward_refs()

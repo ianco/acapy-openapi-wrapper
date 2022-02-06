@@ -25,4 +25,5 @@ class IndyProofProofProofsProof(BaseModel):
     non_revoc_proof: Optional[IndyNonRevocProof] = None
     primary_proof: Optional[IndyPrimaryProof] = None
 
+
 IndyProofProofProofsProof.update_forward_refs()

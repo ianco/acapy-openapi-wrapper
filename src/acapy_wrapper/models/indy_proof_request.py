@@ -9,7 +9,9 @@ from typing import Any, Dict, List, Optional  # noqa: F401
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
 from acapy_wrapper.models.indy_proof_req_attr_spec import IndyProofReqAttrSpec
 from acapy_wrapper.models.indy_proof_req_pred_spec import IndyProofReqPredSpec
-from acapy_wrapper.models.indy_proof_request_non_revoked import IndyProofRequestNonRevoked
+from acapy_wrapper.models.indy_proof_request_non_revoked import (
+    IndyProofRequestNonRevoked,
+)
 
 
 class IndyProofRequest(BaseModel):
@@ -43,5 +45,6 @@ class IndyProofRequest(BaseModel):
     def version_pattern(cls, value):
         assert value is not None and re.match(r"^[0-9.]+$", value)
         return value
+
 
 IndyProofRequest.update_forward_refs()

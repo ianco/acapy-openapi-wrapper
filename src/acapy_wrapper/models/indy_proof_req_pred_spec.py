@@ -7,7 +7,9 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.indy_proof_req_pred_spec_non_revoked import IndyProofReqPredSpecNonRevoked
+from acapy_wrapper.models.indy_proof_req_pred_spec_non_revoked import (
+    IndyProofReqPredSpecNonRevoked,
+)
 
 
 class IndyProofReqPredSpec(BaseModel):
@@ -29,5 +31,6 @@ class IndyProofReqPredSpec(BaseModel):
     p_type: str
     p_value: int
     restrictions: Optional[List[Dict[str, str]]] = None
+
 
 IndyProofReqPredSpec.update_forward_refs()

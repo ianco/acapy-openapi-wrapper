@@ -28,4 +28,5 @@ class IndyProof(BaseModel):
     proof: Optional[IndyProofProof] = None
     requested_proof: Optional[IndyProofRequestedProof] = None
 
+
 IndyProof.update_forward_refs()

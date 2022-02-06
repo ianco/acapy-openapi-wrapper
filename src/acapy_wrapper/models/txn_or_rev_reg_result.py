@@ -25,4 +25,5 @@ class TxnOrRevRegResult(BaseModel):
     sent: Optional[RevRegResult] = None
     txn: Optional[TransactionRecord] = None
 
+
 TxnOrRevRegResult.update_forward_refs()

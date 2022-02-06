@@ -25,12 +25,19 @@ class EndpointsResult(BaseModel):
 
     @validator("my_endpoint")
     def my_endpoint_pattern(cls, value):
-        assert value is not None and re.match(r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$", value)
+        assert value is not None and re.match(
+            r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$",
+            value,
+        )
         return value
 
     @validator("their_endpoint")
     def their_endpoint_pattern(cls, value):
-        assert value is not None and re.match(r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$", value)
+        assert value is not None and re.match(
+            r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$",
+            value,
+        )
         return value
+
 
 EndpointsResult.update_forward_refs()

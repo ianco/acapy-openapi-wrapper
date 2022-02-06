@@ -28,4 +28,5 @@ class DIFPresSpec(BaseModel):
     record_ids: Optional[Dict[str, Any]] = None
     reveal_doc: Optional[Dict[str, Any]] = None
 
+
 DIFPresSpec.update_forward_refs()

@@ -24,4 +24,5 @@ class SignRequest(BaseModel):
     doc: Doc
     verkey: str
 
+
 SignRequest.update_forward_refs()

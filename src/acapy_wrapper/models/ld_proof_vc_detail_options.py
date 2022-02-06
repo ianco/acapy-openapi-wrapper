@@ -34,7 +34,11 @@ class LDProofVCDetailOptions(BaseModel):
 
     @validator("created")
     def created_pattern(cls, value):
-        assert value is not None and re.match(r"^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$", value)
+        assert value is not None and re.match(
+            r"^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$",
+            value,
+        )
         return value
+
 
 LDProofVCDetailOptions.update_forward_refs()

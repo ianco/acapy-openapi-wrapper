@@ -33,4 +33,5 @@ class V20CredOfferConnFreeRequest(BaseModel):
     filter: V20CredFilter
     trace: Optional[bool] = None
 
+
 V20CredOfferConnFreeRequest.update_forward_refs()

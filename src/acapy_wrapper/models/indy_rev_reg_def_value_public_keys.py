@@ -7,7 +7,9 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.indy_rev_reg_def_value_public_keys_accum_key import IndyRevRegDefValuePublicKeysAccumKey
+from acapy_wrapper.models.indy_rev_reg_def_value_public_keys_accum_key import (
+    IndyRevRegDefValuePublicKeysAccumKey,
+)
 
 
 class IndyRevRegDefValuePublicKeys(BaseModel):
@@ -21,5 +23,6 @@ class IndyRevRegDefValuePublicKeys(BaseModel):
     """
 
     accum_key: Optional[IndyRevRegDefValuePublicKeysAccumKey] = None
+
 
 IndyRevRegDefValuePublicKeys.update_forward_refs()

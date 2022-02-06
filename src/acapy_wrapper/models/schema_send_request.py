@@ -30,4 +30,5 @@ class SchemaSendRequest(BaseModel):
         assert value is not None and re.match(r"^[0-9.]+$", value)
         return value
 
+
 SchemaSendRequest.update_forward_refs()

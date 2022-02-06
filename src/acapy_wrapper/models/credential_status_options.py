@@ -21,4 +21,5 @@ class CredentialStatusOptions(BaseModel):
 
     type: str
 
+
 CredentialStatusOptions.update_forward_refs()

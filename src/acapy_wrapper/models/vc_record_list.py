@@ -22,4 +22,5 @@ class VCRecordList(BaseModel):
 
     results: Optional[List[VCRecord]] = None
 
+
 VCRecordList.update_forward_refs()

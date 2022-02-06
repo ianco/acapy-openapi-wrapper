@@ -23,4 +23,5 @@ class AttachmentDef(BaseModel):
     id: Optional[str] = None
     type: Optional[str] = None
 
+
 AttachmentDef.update_forward_refs()

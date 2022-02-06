@@ -39,4 +39,5 @@ class VCRecord(BaseModel):
     schema_ids: Optional[List[str]] = None
     subject_ids: Optional[List[str]] = None
 
+
 VCRecord.update_forward_refs()

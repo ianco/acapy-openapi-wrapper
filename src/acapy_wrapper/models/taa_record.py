@@ -25,4 +25,5 @@ class TAARecord(BaseModel):
     text: Optional[str] = None
     version: Optional[str] = None
 
+
 TAARecord.update_forward_refs()

@@ -30,4 +30,5 @@ class V20PresProposalRequest(BaseModel):
     presentation_proposal: V20PresProposalByFormat
     trace: Optional[bool] = None
 
+
 V20PresProposalRequest.update_forward_refs()

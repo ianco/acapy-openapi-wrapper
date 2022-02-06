@@ -22,4 +22,5 @@ class TransactionList(BaseModel):
 
     results: Optional[List[TransactionRecord]] = None
 
+
 TransactionList.update_forward_refs()

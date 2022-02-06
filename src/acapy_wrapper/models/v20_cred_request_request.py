@@ -21,4 +21,5 @@ class V20CredRequestRequest(BaseModel):
 
     holder_did: Optional[str] = None
 
+
 V20CredRequestRequest.update_forward_refs()

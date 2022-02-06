@@ -22,4 +22,5 @@ class DIFProofProposal(BaseModel):
 
     input_descriptors: Optional[List[InputDescriptors]] = None
 
+
 DIFProofProposal.update_forward_refs()

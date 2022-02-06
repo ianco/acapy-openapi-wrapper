@@ -28,4 +28,5 @@ class PresentationRequest(BaseModel):
     comment: Optional[str] = None
     request_presentationsattach: List[AttachDecorator]
 
+
 PresentationRequest.update_forward_refs()

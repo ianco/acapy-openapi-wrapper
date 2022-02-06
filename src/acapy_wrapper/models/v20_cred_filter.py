@@ -25,4 +25,5 @@ class V20CredFilter(BaseModel):
     indy: Optional[V20CredFilterIndy] = None
     ld_proof: Optional[LDProofVCDetail] = None
 
+
 V20CredFilter.update_forward_refs()

@@ -39,9 +39,7 @@ async def connections_conn_id_start_introduction_post(
     conn_id: str = Path(None, description="Connection identifier"),
     target_connection_id: str = Query(None, description="Target connection identifier"),
     message: str = Query(None, description="Message"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

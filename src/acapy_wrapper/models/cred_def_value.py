@@ -25,4 +25,5 @@ class CredDefValue(BaseModel):
     primary: Optional[CredDefValuePrimary] = None
     revocation: Optional[CredDefValueRevocation] = None
 
+
 CredDefValue.update_forward_refs()

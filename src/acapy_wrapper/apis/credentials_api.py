@@ -44,9 +44,7 @@ router = APIRouter()
 async def credential_credential_id_delete(
     request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -72,9 +70,7 @@ async def credential_credential_id_delete(
 async def credential_credential_id_get(
     request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> IndyCredInfo:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -100,9 +96,7 @@ async def credential_credential_id_get(
 async def credential_mime_types_credential_id_get(
     request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> AttributeMimeTypesResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -128,11 +122,17 @@ async def credential_mime_types_credential_id_get(
 async def credential_revoked_credential_id_get(
     request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
-    _from: str = Query(None, description="Earliest epoch of revocation status interval of interest", regex=r"^[0-9]*$"),
-    to: str = Query(None, description="Latest epoch of revocation status interval of interest", regex=r"^[0-9]*$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    _from: str = Query(
+        None,
+        description="Earliest epoch of revocation status interval of interest",
+        regex=r"^[0-9]*$",
     ),
+    to: str = Query(
+        None,
+        description="Latest epoch of revocation status interval of interest",
+        regex=r"^[0-9]*$",
+    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> CredRevokedResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -158,9 +158,7 @@ async def credential_revoked_credential_id_get(
 async def credential_w3c_credential_id_delete(
     request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -186,9 +184,7 @@ async def credential_w3c_credential_id_delete(
 async def credential_w3c_credential_id_get(
     request: Request,
     credential_id: str = Path(None, description="Credential identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> VCRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -213,12 +209,12 @@ async def credential_w3c_credential_id_get(
 )
 async def credentials_get(
     request: Request,
-    count: str = Query(None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"),
+    count: str = Query(
+        None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"
+    ),
     start: str = Query(None, description="Start index", regex=r"^[0-9]*$"),
     wql: str = Query(None, description="(JSON) WQL query", regex=r"^{.*}$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> CredInfoList:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -243,13 +239,13 @@ async def credentials_get(
 )
 async def credentials_w3c_post(
     request: Request,
-    count: str = Query(None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"),
+    count: str = Query(
+        None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"
+    ),
     start: str = Query(None, description="Start index", regex=r"^[0-9]*$"),
     wql: str = Query(None, description="(JSON) WQL query", regex=r"^{.*}$"),
     body: W3CCredentialsListRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> VCRecordList:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

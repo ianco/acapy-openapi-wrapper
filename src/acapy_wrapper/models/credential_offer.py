@@ -31,4 +31,5 @@ class CredentialOffer(BaseModel):
     credential_preview: Optional[CredentialPreview] = None
     offersattach: List[AttachDecorator]
 
+
 CredentialOffer.update_forward_refs()

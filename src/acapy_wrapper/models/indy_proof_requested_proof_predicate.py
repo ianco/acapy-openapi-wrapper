@@ -21,4 +21,5 @@ class IndyProofRequestedProofPredicate(BaseModel):
 
     sub_proof_index: Optional[int] = None
 
+
 IndyProofRequestedProofPredicate.update_forward_refs()

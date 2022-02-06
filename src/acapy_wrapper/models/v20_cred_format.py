@@ -23,4 +23,5 @@ class V20CredFormat(BaseModel):
     attach_id: str
     format: str
 
+
 V20CredFormat.update_forward_refs()

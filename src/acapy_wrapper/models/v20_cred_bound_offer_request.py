@@ -25,4 +25,5 @@ class V20CredBoundOfferRequest(BaseModel):
     counter_preview: Optional[V20CredPreview] = None
     filter: Optional[V20CredFilter] = None
 
+
 V20CredBoundOfferRequest.update_forward_refs()

@@ -26,4 +26,5 @@ class KeylistUpdate(BaseModel):
     type: Optional[str] = None
     updates: Optional[List[KeylistUpdateRule]] = None
 
+
 KeylistUpdate.update_forward_refs()

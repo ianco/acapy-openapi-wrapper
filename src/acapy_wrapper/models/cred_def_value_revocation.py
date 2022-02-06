@@ -41,4 +41,5 @@ class CredDefValueRevocation(BaseModel):
     u: Optional[str] = None
     y: Optional[str] = None
 
+
 CredDefValueRevocation.update_forward_refs()

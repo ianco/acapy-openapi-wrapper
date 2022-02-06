@@ -28,4 +28,5 @@ class PresentationProposal(BaseModel):
     comment: Optional[str] = None
     presentation_proposal: IndyPresPreview
 
+
 PresentationProposal.update_forward_refs()

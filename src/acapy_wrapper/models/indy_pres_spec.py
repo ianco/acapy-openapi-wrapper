@@ -7,8 +7,12 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.indy_requested_creds_requested_attr import IndyRequestedCredsRequestedAttr
-from acapy_wrapper.models.indy_requested_creds_requested_pred import IndyRequestedCredsRequestedPred
+from acapy_wrapper.models.indy_requested_creds_requested_attr import (
+    IndyRequestedCredsRequestedAttr,
+)
+from acapy_wrapper.models.indy_requested_creds_requested_pred import (
+    IndyRequestedCredsRequestedPred,
+)
 
 
 class IndyPresSpec(BaseModel):
@@ -28,5 +32,6 @@ class IndyPresSpec(BaseModel):
     requested_predicates: Dict[str, IndyRequestedCredsRequestedPred]
     self_attested_attributes: Dict[str, str]
     trace: Optional[bool] = None
+
 
 IndyPresSpec.update_forward_refs()

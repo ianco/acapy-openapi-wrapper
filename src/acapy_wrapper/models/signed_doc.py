@@ -22,4 +22,5 @@ class SignedDoc(BaseModel):
 
     proof: SignatureOptions
 
+
 SignedDoc.update_forward_refs()

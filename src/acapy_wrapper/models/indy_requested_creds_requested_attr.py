@@ -23,4 +23,5 @@ class IndyRequestedCredsRequestedAttr(BaseModel):
     cred_id: str
     revealed: Optional[bool] = None
 
+
 IndyRequestedCredsRequestedAttr.update_forward_refs()

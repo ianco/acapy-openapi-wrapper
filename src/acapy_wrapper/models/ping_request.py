@@ -21,4 +21,5 @@ class PingRequest(BaseModel):
 
     comment: Optional[str] = None
 
+
 PingRequest.update_forward_refs()

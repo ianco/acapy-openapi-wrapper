@@ -53,4 +53,5 @@ class IndyNonRevocationInterval(BaseModel):
         assert value >= 0
         return value
 
+
 IndyNonRevocationInterval.update_forward_refs()

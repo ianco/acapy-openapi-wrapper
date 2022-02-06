@@ -21,4 +21,5 @@ class V20CredIssueProblemReportRequest(BaseModel):
 
     description: str
 
+
 V20CredIssueProblemReportRequest.update_forward_refs()

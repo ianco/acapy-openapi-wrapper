@@ -21,4 +21,5 @@ class CreateWalletTokenRequest(BaseModel):
 
     wallet_key: Optional[str] = None
 
+
 CreateWalletTokenRequest.update_forward_refs()

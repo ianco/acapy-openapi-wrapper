@@ -28,4 +28,5 @@ class RawEncoded(BaseModel):
         assert value is not None and re.match(r"^-?[0-9]*$", value)
         return value
 
+
 RawEncoded.update_forward_refs()

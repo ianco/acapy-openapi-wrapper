@@ -25,4 +25,5 @@ class TxnOrPublishRevocationsResult(BaseModel):
     sent: Optional[PublishRevocations] = None
     txn: Optional[TransactionRecord] = None
 
+
 TxnOrPublishRevocationsResult.update_forward_refs()

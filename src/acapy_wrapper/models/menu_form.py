@@ -28,4 +28,5 @@ class MenuForm(BaseModel):
     submit_label: Optional[str] = None
     title: Optional[str] = None
 
+
 MenuForm.update_forward_refs()

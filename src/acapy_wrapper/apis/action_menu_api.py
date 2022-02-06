@@ -40,9 +40,7 @@ router = APIRouter()
 async def action_menu_conn_id_close_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -68,9 +66,7 @@ async def action_menu_conn_id_close_post(
 async def action_menu_conn_id_fetch_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ActionMenuFetchResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -97,9 +93,7 @@ async def action_menu_conn_id_perform_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     body: PerformRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -125,9 +119,7 @@ async def action_menu_conn_id_perform_post(
 async def action_menu_conn_id_request_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -154,9 +146,7 @@ async def action_menu_conn_id_send_menu_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     body: SendMenu = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

@@ -20,13 +20,19 @@ from fastapi import (  # noqa: F401
 from acapy_wrapper.models.extra_models import TokenModel  # noqa: F401
 from acapy_wrapper.models.admin_api_message_tracing import AdminAPIMessageTracing
 from acapy_wrapper.models.indy_cred_precis import IndyCredPrecis
-from acapy_wrapper.models.v20_pres_create_request_request import V20PresCreateRequestRequest
+from acapy_wrapper.models.v20_pres_create_request_request import (
+    V20PresCreateRequestRequest,
+)
 from acapy_wrapper.models.v20_pres_ex_record import V20PresExRecord
 from acapy_wrapper.models.v20_pres_ex_record_list import V20PresExRecordList
-from acapy_wrapper.models.v20_pres_problem_report_request import V20PresProblemReportRequest
+from acapy_wrapper.models.v20_pres_problem_report_request import (
+    V20PresProblemReportRequest,
+)
 from acapy_wrapper.models.v20_pres_proposal_request import V20PresProposalRequest
 from acapy_wrapper.models.v20_pres_send_request_request import V20PresSendRequestRequest
-from acapy_wrapper.models.v20_pres_spec_by_format_request import V20PresSpecByFormatRequest
+from acapy_wrapper.models.v20_pres_spec_by_format_request import (
+    V20PresSpecByFormatRequest,
+)
 from acapy_wrapper.security_api import get_token_AuthorizationHeader
 
 from api import acapy_utils as au
@@ -46,9 +52,7 @@ router = APIRouter()
 async def present_proof20_create_request_post(
     request: Request,
     body: V20PresCreateRequestRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -77,9 +81,7 @@ async def present_proof20_records_get(
     role: str = Query(None, description="Role assigned in presentation exchange"),
     state: str = Query(None, description="Presentation exchange state"),
     thread_id: str = Query(None, description="Thread identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecordList:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -104,14 +106,24 @@ async def present_proof20_records_get(
 )
 async def present_proof20_records_pres_ex_id_credentials_get(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    count: str = Query(None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"),
-    extra_query: str = Query(None, description="(JSON) dict mapping referents to extra WQL queries", regex=r"^{\s*&quot;.*?&quot;\s*:\s*{.*?}\s*(,\s*&quot;.*?&quot;\s*:\s*{.*?}\s*)*\s*}$"),
-    referent: str = Query(None, description="Proof request referents of interest, comma-separated"),
-    start: str = Query(None, description="Start index", regex=r"^[0-9]*$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    count: str = Query(
+        None, description="Maximum number to retrieve", regex=r"^[1-9][0-9]*$"
+    ),
+    extra_query: str = Query(
+        None,
+        description="(JSON) dict mapping referents to extra WQL queries",
+        regex=r"^{\s*&quot;.*?&quot;\s*:\s*{.*?}\s*(,\s*&quot;.*?&quot;\s*:\s*{.*?}\s*)*\s*}$",
+    ),
+    referent: str = Query(
+        None, description="Proof request referents of interest, comma-separated"
+    ),
+    start: str = Query(None, description="Start index", regex=r"^[0-9]*$"),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> List[IndyCredPrecis]:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -136,10 +148,12 @@ async def present_proof20_records_pres_ex_id_credentials_get(
 )
 async def present_proof20_records_pres_ex_id_delete(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -164,10 +178,12 @@ async def present_proof20_records_pres_ex_id_delete(
 )
 async def present_proof20_records_pres_ex_id_get(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -192,11 +208,13 @@ async def present_proof20_records_pres_ex_id_get(
 )
 async def present_proof20_records_pres_ex_id_problem_report_post(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20PresProblemReportRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20PresProblemReportRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -221,11 +239,13 @@ async def present_proof20_records_pres_ex_id_problem_report_post(
 )
 async def present_proof20_records_pres_ex_id_send_presentation_post(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20PresSpecByFormatRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20PresSpecByFormatRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -250,11 +270,13 @@ async def present_proof20_records_pres_ex_id_send_presentation_post(
 )
 async def present_proof20_records_pres_ex_id_send_request_post(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: AdminAPIMessageTracing = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: AdminAPIMessageTracing = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -279,10 +301,12 @@ async def present_proof20_records_pres_ex_id_send_request_post(
 )
 async def present_proof20_records_pres_ex_id_verify_presentation_post(
     request: Request,
-    pres_ex_id: str = Path(None, description="Presentation exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    pres_ex_id: str = Path(
+        None,
+        description="Presentation exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -308,9 +332,7 @@ async def present_proof20_records_pres_ex_id_verify_presentation_post(
 async def present_proof20_send_proposal_post(
     request: Request,
     body: V20PresProposalRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -336,9 +358,7 @@ async def present_proof20_send_proposal_post(
 async def present_proof20_send_request_post(
     request: Request,
     body: V20PresSendRequestRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20PresExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

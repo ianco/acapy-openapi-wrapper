@@ -26,4 +26,5 @@ class RevRegIssuedResult(BaseModel):
         assert value >= 0
         return value
 
+
 RevRegIssuedResult.update_forward_refs()

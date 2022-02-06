@@ -21,4 +21,5 @@ class V20CredIssueRequest(BaseModel):
 
     comment: Optional[str] = None
 
+
 V20CredIssueRequest.update_forward_refs()

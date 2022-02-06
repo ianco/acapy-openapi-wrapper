@@ -28,4 +28,5 @@ class KeylistQuery(BaseModel):
     filter: Optional[Dict[str, Any]] = None
     paginate: Optional[KeylistQueryPaginate] = None
 
+
 KeylistQuery.update_forward_refs()

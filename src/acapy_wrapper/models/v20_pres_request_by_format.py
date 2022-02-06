@@ -25,4 +25,5 @@ class V20PresRequestByFormat(BaseModel):
     dif: Optional[DIFProofRequest] = None
     indy: Optional[IndyProofRequest] = None
 
+
 V20PresRequestByFormat.update_forward_refs()

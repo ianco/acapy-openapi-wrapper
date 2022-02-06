@@ -23,4 +23,5 @@ class SchemaInputDescriptor(BaseModel):
     required: Optional[bool] = None
     uri: Optional[str] = None
 
+
 SchemaInputDescriptor.update_forward_refs()

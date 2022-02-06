@@ -21,4 +21,5 @@ class RevRegUpdateTailsFileUri(BaseModel):
 
     tails_public_uri: str
 
+
 RevRegUpdateTailsFileUri.update_forward_refs()

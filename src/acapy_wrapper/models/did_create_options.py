@@ -21,4 +21,5 @@ class DIDCreateOptions(BaseModel):
 
     key_type: str
 
+
 DIDCreateOptions.update_forward_refs()

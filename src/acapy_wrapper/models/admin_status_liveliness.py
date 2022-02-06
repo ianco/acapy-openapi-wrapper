@@ -21,4 +21,5 @@ class AdminStatusLiveliness(BaseModel):
 
     alive: Optional[bool] = None
 
+
 AdminStatusLiveliness.update_forward_refs()

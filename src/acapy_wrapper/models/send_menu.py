@@ -22,4 +22,5 @@ class SendMenu(BaseModel):
 
     menu: MenuJson
 
+
 SendMenu.update_forward_refs()

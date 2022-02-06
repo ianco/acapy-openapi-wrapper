@@ -21,4 +21,5 @@ class V10CredentialProblemReportRequest(BaseModel):
 
     description: str
 
+
 V10CredentialProblemReportRequest.update_forward_refs()

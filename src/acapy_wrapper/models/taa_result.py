@@ -22,4 +22,5 @@ class TAAResult(BaseModel):
 
     result: Optional[TAAInfo] = None
 
+
 TAAResult.update_forward_refs()

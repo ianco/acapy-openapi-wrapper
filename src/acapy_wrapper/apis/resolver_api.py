@@ -37,10 +37,12 @@ router = APIRouter()
 )
 async def resolver_resolve_did_get(
     request: Request,
-    did: str = Path(None, description="DID", regex=r"^did:([a-z0-9]+):((?:[a-zA-Z0-9._%-]*:)*[a-zA-Z0-9._%-]+)$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    did: str = Path(
+        None,
+        description="DID",
+        regex=r"^did:([a-z0-9]+):((?:[a-zA-Z0-9._%-]*:)*[a-zA-Z0-9._%-]+)$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ResolutionResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

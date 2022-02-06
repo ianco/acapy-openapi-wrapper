@@ -27,4 +27,5 @@ class IndyPresPreview(BaseModel):
     attributes: List[IndyPresAttrSpec]
     predicates: List[IndyPresPredSpec]
 
+
 IndyPresPreview.update_forward_refs()

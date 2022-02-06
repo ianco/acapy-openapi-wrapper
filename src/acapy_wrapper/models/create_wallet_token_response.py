@@ -21,4 +21,5 @@ class CreateWalletTokenResponse(BaseModel):
 
     token: Optional[str] = None
 
+
 CreateWalletTokenResponse.update_forward_refs()

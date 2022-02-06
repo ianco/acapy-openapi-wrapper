@@ -7,7 +7,9 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.attach_decorator_data_jws_header import AttachDecoratorDataJWSHeader
+from acapy_wrapper.models.attach_decorator_data_jws_header import (
+    AttachDecoratorDataJWSHeader,
+)
 
 
 class AttachDecoratorData1JWS(BaseModel):
@@ -35,5 +37,6 @@ class AttachDecoratorData1JWS(BaseModel):
     def signature_pattern(cls, value):
         assert value is not None and re.match(r"^[-_a-zA-Z0-9]*$", value)
         return value
+
 
 AttachDecoratorData1JWS.update_forward_refs()

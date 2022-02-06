@@ -7,9 +7,15 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.indy_proof_requested_proof_predicate import IndyProofRequestedProofPredicate
-from acapy_wrapper.models.indy_proof_requested_proof_revealed_attr import IndyProofRequestedProofRevealedAttr
-from acapy_wrapper.models.indy_proof_requested_proof_revealed_attr_group import IndyProofRequestedProofRevealedAttrGroup
+from acapy_wrapper.models.indy_proof_requested_proof_predicate import (
+    IndyProofRequestedProofPredicate,
+)
+from acapy_wrapper.models.indy_proof_requested_proof_revealed_attr import (
+    IndyProofRequestedProofRevealedAttr,
+)
+from acapy_wrapper.models.indy_proof_requested_proof_revealed_attr_group import (
+    IndyProofRequestedProofRevealedAttrGroup,
+)
 
 
 class IndyProofRequestedProof(BaseModel):
@@ -27,9 +33,12 @@ class IndyProofRequestedProof(BaseModel):
     """
 
     predicates: Optional[Dict[str, IndyProofRequestedProofPredicate]] = None
-    revealed_attr_groups: Optional[Dict[str, IndyProofRequestedProofRevealedAttrGroup]] = None
+    revealed_attr_groups: Optional[
+        Dict[str, IndyProofRequestedProofRevealedAttrGroup]
+    ] = None
     revealed_attrs: Optional[Dict[str, IndyProofRequestedProofRevealedAttr]] = None
     self_attested_attrs: Optional[Dict[str, Any]] = None
     unrevealed_attrs: Optional[Dict[str, Any]] = None
+
 
 IndyProofRequestedProof.update_forward_refs()

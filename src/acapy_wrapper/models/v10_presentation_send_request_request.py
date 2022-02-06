@@ -28,4 +28,5 @@ class V10PresentationSendRequestRequest(BaseModel):
     proof_request: IndyProofRequest
     trace: Optional[bool] = None
 
+
 V10PresentationSendRequestRequest.update_forward_refs()

@@ -7,7 +7,9 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.indy_rev_reg_def_value_public_keys import IndyRevRegDefValuePublicKeys
+from acapy_wrapper.models.indy_rev_reg_def_value_public_keys import (
+    IndyRevRegDefValuePublicKeys,
+)
 
 
 class IndyRevRegDefValue(BaseModel):
@@ -37,7 +39,11 @@ class IndyRevRegDefValue(BaseModel):
 
     @validator("tails_hash")
     def tails_hash_pattern(cls, value):
-        assert value is not None and re.match(r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$", value)
+        assert value is not None and re.match(
+            r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$",
+            value,
+        )
         return value
+
 
 IndyRevRegDefValue.update_forward_refs()

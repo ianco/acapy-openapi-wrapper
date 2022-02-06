@@ -26,4 +26,5 @@ class V20PresCreateRequestRequest(BaseModel):
     presentation_request: V20PresRequestByFormat
     trace: Optional[bool] = None
 
+
 V20PresCreateRequestRequest.update_forward_refs()

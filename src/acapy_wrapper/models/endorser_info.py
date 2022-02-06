@@ -23,4 +23,5 @@ class EndorserInfo(BaseModel):
     endorser_did: str
     endorser_name: Optional[str] = None
 
+
 EndorserInfo.update_forward_refs()

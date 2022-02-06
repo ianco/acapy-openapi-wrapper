@@ -23,4 +23,5 @@ class DIFHolder(BaseModel):
     directive: Optional[str] = None
     field_id: Optional[List[str]] = None
 
+
 DIFHolder.update_forward_refs()

@@ -35,4 +35,5 @@ class Constraints(BaseModel):
     status_suspended: Optional[str] = None
     subject_is_issuer: Optional[str] = None
 
+
 Constraints.update_forward_refs()

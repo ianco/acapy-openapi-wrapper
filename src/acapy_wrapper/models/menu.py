@@ -32,4 +32,5 @@ class Menu(BaseModel):
     options: List[MenuOption]
     title: Optional[str] = None
 
+
 Menu.update_forward_refs()

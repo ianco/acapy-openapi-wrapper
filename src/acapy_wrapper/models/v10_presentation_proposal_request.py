@@ -30,4 +30,5 @@ class V10PresentationProposalRequest(BaseModel):
     presentation_proposal: IndyPresPreview
     trace: Optional[bool] = None
 
+
 V10PresentationProposalRequest.update_forward_refs()

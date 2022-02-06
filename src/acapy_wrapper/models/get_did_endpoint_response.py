@@ -23,7 +23,11 @@ class GetDIDEndpointResponse(BaseModel):
 
     @validator("endpoint")
     def endpoint_pattern(cls, value):
-        assert value is not None and re.match(r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$", value)
+        assert value is not None and re.match(
+            r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$",
+            value,
+        )
         return value
+
 
 GetDIDEndpointResponse.update_forward_refs()

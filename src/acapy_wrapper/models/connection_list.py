@@ -22,4 +22,5 @@ class ConnectionList(BaseModel):
 
     results: Optional[List[ConnRecord]] = None
 
+
 ConnectionList.update_forward_refs()

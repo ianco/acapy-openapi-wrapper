@@ -32,4 +32,5 @@ class V20CredRequestFree(BaseModel):
     holder_did: Optional[str] = None
     trace: Optional[bool] = None
 
+
 V20CredRequestFree.update_forward_refs()

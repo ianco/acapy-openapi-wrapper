@@ -27,4 +27,5 @@ class AdminStatus(BaseModel):
     timing: Optional[Dict[str, Any]] = None
     version: Optional[str] = None
 
+
 AdminStatus.update_forward_refs()

@@ -25,4 +25,5 @@ class V20PresProposalByFormat(BaseModel):
     dif: Optional[DIFProofProposal] = None
     indy: Optional[IndyProofRequest] = None
 
+
 V20PresProposalByFormat.update_forward_refs()

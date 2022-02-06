@@ -27,4 +27,5 @@ class V20CredExRecordByFormat(BaseModel):
     cred_proposal: Optional[Dict[str, Any]] = None
     cred_request: Optional[Dict[str, Any]] = None
 
+
 V20CredExRecordByFormat.update_forward_refs()

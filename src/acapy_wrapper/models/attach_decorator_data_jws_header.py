@@ -23,7 +23,11 @@ class AttachDecoratorDataJWSHeader(BaseModel):
 
     @validator("kid")
     def kid_pattern(cls, value):
-        assert value is not None and re.match(r"^did:(?:key:z[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+|sov:[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}(;.*)?(\?.*)?#.+)$", value)
+        assert value is not None and re.match(
+            r"^did:(?:key:z[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+|sov:[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}(;.*)?(\?.*)?#.+)$",
+            value,
+        )
         return value
+
 
 AttachDecoratorDataJWSHeader.update_forward_refs()

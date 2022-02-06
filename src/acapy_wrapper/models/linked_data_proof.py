@@ -39,7 +39,10 @@ class LinkedDataProof(BaseModel):
 
     @validator("created")
     def created_pattern(cls, value):
-        assert value is not None and re.match(r"^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$", value)
+        assert value is not None and re.match(
+            r"^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$",
+            value,
+        )
         return value
 
     @validator("domain")
@@ -51,5 +54,6 @@ class LinkedDataProof(BaseModel):
     def verification_method_pattern(cls, value):
         assert value is not None and re.match(r"\w+:(\\/?\\/?)[^\s]+", value)
         return value
+
 
 LinkedDataProof.update_forward_refs()

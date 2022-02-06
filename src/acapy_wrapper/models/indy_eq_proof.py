@@ -51,4 +51,5 @@ class IndyEQProof(BaseModel):
         assert value is not None and re.match(r"^[0-9]*$", value)
         return value
 
+
 IndyEQProof.update_forward_refs()

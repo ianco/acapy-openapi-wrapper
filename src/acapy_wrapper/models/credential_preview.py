@@ -24,4 +24,5 @@ class CredentialPreview(BaseModel):
     type: Optional[str] = None
     attributes: List[CredAttrSpec]
 
+
 CredentialPreview.update_forward_refs()

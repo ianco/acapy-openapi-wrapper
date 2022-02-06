@@ -33,4 +33,5 @@ class V20PresRequest(BaseModel):
     request_presentationsattach: List[AttachDecorator]
     will_confirm: Optional[bool] = None
 
+
 V20PresRequest.update_forward_refs()

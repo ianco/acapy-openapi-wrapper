@@ -21,4 +21,5 @@ class CredentialDefinitionsCreatedResult(BaseModel):
 
     credential_definition_ids: Optional[List[str]] = None
 
+
 CredentialDefinitionsCreatedResult.update_forward_refs()

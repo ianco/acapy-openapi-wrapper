@@ -37,7 +37,11 @@ class ConnectionInvitation(BaseModel):
 
     @validator("did")
     def did_pattern(cls, value):
-        assert value is not None and re.match(r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$", value)
+        assert value is not None and re.match(
+            r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
+            value,
+        )
         return value
+
 
 ConnectionInvitation.update_forward_refs()

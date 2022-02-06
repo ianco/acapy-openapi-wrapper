@@ -31,4 +31,5 @@ class V20IssueCredSchemaCore(BaseModel):
     filter: V20CredFilter
     trace: Optional[bool] = None
 
+
 V20IssueCredSchemaCore.update_forward_refs()

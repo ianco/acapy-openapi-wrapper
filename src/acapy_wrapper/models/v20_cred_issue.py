@@ -33,4 +33,5 @@ class V20CredIssue(BaseModel):
     formats: List[V20CredFormat]
     replacement_id: Optional[str] = None
 
+
 V20CredIssue.update_forward_refs()

@@ -22,4 +22,5 @@ class CredentialDefinitionGetResult(BaseModel):
 
     credential_definition: Optional[CredentialDefinition] = None
 
+
 CredentialDefinitionGetResult.update_forward_refs()

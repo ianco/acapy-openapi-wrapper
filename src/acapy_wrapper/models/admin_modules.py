@@ -21,4 +21,5 @@ class AdminModules(BaseModel):
 
     result: Optional[List[str]] = None
 
+
 AdminModules.update_forward_refs()

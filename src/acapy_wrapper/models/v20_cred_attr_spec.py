@@ -25,4 +25,5 @@ class V20CredAttrSpec(BaseModel):
     name: str
     value: str
 
+
 V20CredAttrSpec.update_forward_refs()

@@ -21,4 +21,5 @@ class AdminConfig(BaseModel):
 
     config: Optional[Dict[str, Any]] = None
 
+
 AdminConfig.update_forward_refs()

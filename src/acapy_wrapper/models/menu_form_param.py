@@ -31,4 +31,5 @@ class MenuFormParam(BaseModel):
     title: str
     type: Optional[str] = None
 
+
 MenuFormParam.update_forward_refs()

@@ -22,4 +22,5 @@ class RevRegResult(BaseModel):
 
     result: Optional[IssuerRevRegRecord] = None
 
+
 RevRegResult.update_forward_refs()

@@ -21,4 +21,5 @@ class PublishRevocations(BaseModel):
 
     rrid2crid: Optional[Dict[str, List[str]]] = None
 
+
 PublishRevocations.update_forward_refs()

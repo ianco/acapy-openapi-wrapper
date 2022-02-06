@@ -21,4 +21,5 @@ class ClearPendingRevocationsRequest(BaseModel):
 
     purge: Optional[Dict[str, List[str]]] = None
 
+
 ClearPendingRevocationsRequest.update_forward_refs()

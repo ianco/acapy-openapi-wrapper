@@ -36,7 +36,11 @@ class AttachDecorator(BaseModel):
 
     @validator("lastmod_time")
     def lastmod_time_pattern(cls, value):
-        assert value is not None and re.match(r"^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$", value)
+        assert value is not None and re.match(
+            r"^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$",
+            value,
+        )
         return value
+
 
 AttachDecorator.update_forward_refs()

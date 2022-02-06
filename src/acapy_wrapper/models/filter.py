@@ -43,4 +43,5 @@ class Filter(BaseModel):
     pattern: Optional[str] = None
     type: Optional[str] = None
 
+
 Filter.update_forward_refs()

@@ -21,7 +21,9 @@ from acapy_wrapper.models.extra_models import TokenModel  # noqa: F401
 from acapy_wrapper.models.conn_record import ConnRecord
 from acapy_wrapper.models.connection_list import ConnectionList
 from acapy_wrapper.models.connection_metadata import ConnectionMetadata
-from acapy_wrapper.models.connection_metadata_set_request import ConnectionMetadataSetRequest
+from acapy_wrapper.models.connection_metadata_set_request import (
+    ConnectionMetadataSetRequest,
+)
 from acapy_wrapper.models.connection_static_request import ConnectionStaticRequest
 from acapy_wrapper.models.connection_static_result import ConnectionStaticResult
 from acapy_wrapper.models.create_invitation_request import CreateInvitationRequest
@@ -47,12 +49,18 @@ router = APIRouter()
 async def connections_conn_id_accept_invitation_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    mediation_id: str = Query(None, description="Identifier for active mediation record to be used", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    my_endpoint: str = Query(None, description="My URL endpoint", regex=r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$"),
-    my_label: str = Query(None, description="Label for connection"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    mediation_id: str = Query(
+        None,
+        description="Identifier for active mediation record to be used",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    my_endpoint: str = Query(
+        None,
+        description="My URL endpoint",
+        regex=r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$",
+    ),
+    my_label: str = Query(None, description="Label for connection"),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -78,10 +86,12 @@ async def connections_conn_id_accept_invitation_post(
 async def connections_conn_id_accept_request_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    my_endpoint: str = Query(None, description="My URL endpoint", regex=r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    my_endpoint: str = Query(
+        None,
+        description="My URL endpoint",
+        regex=r"^[A-Za-z0-9\.\-\+]+:\/\/([A-Za-z0-9][.A-Za-z0-9-_]+[A-Za-z0-9])+(:[1-9][0-9]*)?(\/[^?&amp;#]+)?$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -107,9 +117,7 @@ async def connections_conn_id_accept_request_post(
 async def connections_conn_id_delete(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -135,9 +143,7 @@ async def connections_conn_id_delete(
 async def connections_conn_id_endpoints_get(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> EndpointsResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -164,9 +170,7 @@ async def connections_conn_id_establish_inbound_ref_id_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     ref_id: str = Path(None, description="Inbound connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -192,9 +196,7 @@ async def connections_conn_id_establish_inbound_ref_id_post(
 async def connections_conn_id_get(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -221,9 +223,7 @@ async def connections_conn_id_metadata_get(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     key: str = Query(None, description="Key to retrieve."),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnectionMetadata:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -250,9 +250,7 @@ async def connections_conn_id_metadata_post(
     request: Request,
     conn_id: str = Path(None, description="Connection identifier"),
     body: ConnectionMetadataSetRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnectionMetadata:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -278,13 +276,17 @@ async def connections_conn_id_metadata_post(
 async def connections_create_invitation_post(
     request: Request,
     alias: str = Query(None, description="Alias"),
-    auto_accept: bool = Query(None, description="Auto-accept connection (defaults to configuration)"),
-    multi_use: bool = Query(None, description="Create invitation for multiple use (default false)"),
-    public: bool = Query(None, description="Create invitation from public DID (default false)"),
-    body: CreateInvitationRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    auto_accept: bool = Query(
+        None, description="Auto-accept connection (defaults to configuration)"
     ),
+    multi_use: bool = Query(
+        None, description="Create invitation for multiple use (default false)"
+    ),
+    public: bool = Query(
+        None, description="Create invitation from public DID (default false)"
+    ),
+    body: CreateInvitationRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> InvitationResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -310,9 +312,7 @@ async def connections_create_invitation_post(
 async def connections_create_static_post(
     request: Request,
     body: ConnectionStaticRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnectionStaticResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -339,14 +339,24 @@ async def connections_get(
     request: Request,
     alias: str = Query(None, description="Alias"),
     connection_protocol: str = Query(None, description="Connection protocol used"),
-    invitation_key: str = Query(None, description="invitation key", regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$"),
-    my_did: str = Query(None, description="My DID", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
-    state: str = Query(None, description="Connection state"),
-    their_did: str = Query(None, description="Their DID", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
-    their_role: str = Query(None, description="Their role in the connection protocol"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    invitation_key: str = Query(
+        None,
+        description="invitation key",
+        regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$",
     ),
+    my_did: str = Query(
+        None,
+        description="My DID",
+        regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
+    ),
+    state: str = Query(None, description="Connection state"),
+    their_did: str = Query(
+        None,
+        description="Their DID",
+        regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
+    ),
+    their_role: str = Query(None, description="Their role in the connection protocol"),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnectionList:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -372,12 +382,16 @@ async def connections_get(
 async def connections_receive_invitation_post(
     request: Request,
     alias: str = Query(None, description="Alias"),
-    auto_accept: bool = Query(None, description="Auto-accept connection (defaults to configuration)"),
-    mediation_id: str = Query(None, description="Identifier for active mediation record to be used", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: ReceiveInvitationRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    auto_accept: bool = Query(
+        None, description="Auto-accept connection (defaults to configuration)"
     ),
+    mediation_id: str = Query(
+        None,
+        description="Identifier for active mediation record to be used",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
+    ),
+    body: ReceiveInvitationRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> ConnRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

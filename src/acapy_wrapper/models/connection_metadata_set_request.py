@@ -21,4 +21,5 @@ class ConnectionMetadataSetRequest(BaseModel):
 
     metadata: Dict[str, Any]
 
+
 ConnectionMetadataSetRequest.update_forward_refs()

@@ -21,4 +21,5 @@ class V10CredentialIssueRequest(BaseModel):
 
     comment: Optional[str] = None
 
+
 V10CredentialIssueRequest.update_forward_refs()

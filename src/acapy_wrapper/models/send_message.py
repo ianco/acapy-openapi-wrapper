@@ -21,4 +21,5 @@ class SendMessage(BaseModel):
 
     content: Optional[str] = None
 
+
 SendMessage.update_forward_refs()

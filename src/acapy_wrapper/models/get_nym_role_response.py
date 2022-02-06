@@ -21,4 +21,5 @@ class GetNymRoleResponse(BaseModel):
 
     role: Optional[str] = None
 
+
 GetNymRoleResponse.update_forward_refs()

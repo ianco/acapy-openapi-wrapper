@@ -22,4 +22,5 @@ class WalletList(BaseModel):
 
     results: Optional[List[WalletRecord]] = None
 
+
 WalletList.update_forward_refs()

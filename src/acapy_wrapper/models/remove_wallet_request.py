@@ -21,4 +21,5 @@ class RemoveWalletRequest(BaseModel):
 
     wallet_key: Optional[str] = None
 
+
 RemoveWalletRequest.update_forward_refs()

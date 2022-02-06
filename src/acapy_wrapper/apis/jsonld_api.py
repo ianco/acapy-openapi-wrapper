@@ -41,9 +41,7 @@ router = APIRouter()
 async def jsonld_sign_post(
     request: Request,
     body: SignRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> SignResponse:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -69,9 +67,7 @@ async def jsonld_sign_post(
 async def jsonld_verify_post(
     request: Request,
     body: VerifyRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> VerifyResponse:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

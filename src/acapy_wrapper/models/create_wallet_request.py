@@ -35,4 +35,5 @@ class CreateWalletRequest(BaseModel):
     wallet_type: Optional[str] = None
     wallet_webhook_urls: Optional[List[str]] = None
 
+
 CreateWalletRequest.update_forward_refs()

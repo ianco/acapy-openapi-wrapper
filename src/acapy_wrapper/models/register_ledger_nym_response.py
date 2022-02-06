@@ -21,4 +21,5 @@ class RegisterLedgerNymResponse(BaseModel):
 
     success: Optional[bool] = None
 
+
 RegisterLedgerNymResponse.update_forward_refs()

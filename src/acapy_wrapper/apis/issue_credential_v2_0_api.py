@@ -22,10 +22,16 @@ from acapy_wrapper.models.v20_cred_bound_offer_request import V20CredBoundOfferR
 from acapy_wrapper.models.v20_cred_ex_free import V20CredExFree
 from acapy_wrapper.models.v20_cred_ex_record import V20CredExRecord
 from acapy_wrapper.models.v20_cred_ex_record_detail import V20CredExRecordDetail
-from acapy_wrapper.models.v20_cred_ex_record_list_result import V20CredExRecordListResult
-from acapy_wrapper.models.v20_cred_issue_problem_report_request import V20CredIssueProblemReportRequest
+from acapy_wrapper.models.v20_cred_ex_record_list_result import (
+    V20CredExRecordListResult,
+)
+from acapy_wrapper.models.v20_cred_issue_problem_report_request import (
+    V20CredIssueProblemReportRequest,
+)
 from acapy_wrapper.models.v20_cred_issue_request import V20CredIssueRequest
-from acapy_wrapper.models.v20_cred_offer_conn_free_request import V20CredOfferConnFreeRequest
+from acapy_wrapper.models.v20_cred_offer_conn_free_request import (
+    V20CredOfferConnFreeRequest,
+)
 from acapy_wrapper.models.v20_cred_offer_request import V20CredOfferRequest
 from acapy_wrapper.models.v20_cred_request_free import V20CredRequestFree
 from acapy_wrapper.models.v20_cred_request_request import V20CredRequestRequest
@@ -50,9 +56,7 @@ router = APIRouter()
 async def issue_credential20_create_offer_post(
     request: Request,
     body: V20CredOfferConnFreeRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -78,9 +82,7 @@ async def issue_credential20_create_offer_post(
 async def issue_credential20_create_post(
     request: Request,
     body: V20IssueCredSchemaCore = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -105,10 +107,12 @@ async def issue_credential20_create_post(
 )
 async def issue_credential20_records_cred_ex_id_delete(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -133,10 +137,12 @@ async def issue_credential20_records_cred_ex_id_delete(
 )
 async def issue_credential20_records_cred_ex_id_get(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecordDetail:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -161,11 +167,13 @@ async def issue_credential20_records_cred_ex_id_get(
 )
 async def issue_credential20_records_cred_ex_id_issue_post(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20CredIssueRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20CredIssueRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecordDetail:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -190,11 +198,13 @@ async def issue_credential20_records_cred_ex_id_issue_post(
 )
 async def issue_credential20_records_cred_ex_id_problem_report_post(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20CredIssueProblemReportRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20CredIssueProblemReportRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -219,11 +229,13 @@ async def issue_credential20_records_cred_ex_id_problem_report_post(
 )
 async def issue_credential20_records_cred_ex_id_send_offer_post(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20CredBoundOfferRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20CredBoundOfferRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -248,11 +260,13 @@ async def issue_credential20_records_cred_ex_id_send_offer_post(
 )
 async def issue_credential20_records_cred_ex_id_send_request_post(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20CredRequestRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20CredRequestRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -277,11 +291,13 @@ async def issue_credential20_records_cred_ex_id_send_request_post(
 )
 async def issue_credential20_records_cred_ex_id_store_post(
     request: Request,
-    cred_ex_id: str = Path(None, description="Credential exchange identifier", regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"),
-    body: V20CredStoreRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    cred_ex_id: str = Path(
+        None,
+        description="Credential exchange identifier",
+        regex=r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
     ),
+    body: V20CredStoreRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecordDetail:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -310,9 +326,7 @@ async def issue_credential20_records_get(
     role: str = Query(None, description="Role assigned in credential exchange"),
     state: str = Query(None, description="Credential exchange state"),
     thread_id: str = Query(None, description="Thread identifier"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecordListResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -338,9 +352,7 @@ async def issue_credential20_records_get(
 async def issue_credential20_send_offer_post(
     request: Request,
     body: V20CredOfferRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -366,9 +378,7 @@ async def issue_credential20_send_offer_post(
 async def issue_credential20_send_post(
     request: Request,
     body: V20CredExFree = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -394,9 +404,7 @@ async def issue_credential20_send_post(
 async def issue_credential20_send_proposal_post(
     request: Request,
     body: V20CredExFree = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -422,9 +430,7 @@ async def issue_credential20_send_proposal_post(
 async def issue_credential20_send_request_post(
     request: Request,
     body: V20CredRequestFree = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> V20CredExRecord:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

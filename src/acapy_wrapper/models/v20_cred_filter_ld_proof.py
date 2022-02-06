@@ -22,4 +22,5 @@ class V20CredFilterLDProof(BaseModel):
 
     ld_proof: LDProofVCDetail
 
+
 V20CredFilterLDProof.update_forward_refs()

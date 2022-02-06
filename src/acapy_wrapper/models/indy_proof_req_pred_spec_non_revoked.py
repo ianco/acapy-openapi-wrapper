@@ -53,4 +53,5 @@ class IndyProofReqPredSpecNonRevoked(BaseModel):
         assert value >= 0
         return value
 
+
 IndyProofReqPredSpecNonRevoked.update_forward_refs()

@@ -23,7 +23,11 @@ class GetDIDVerkeyResponse(BaseModel):
 
     @validator("verkey")
     def verkey_pattern(cls, value):
-        assert value is not None and re.match(r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$", value)
+        assert value is not None and re.match(
+            r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$",
+            value,
+        )
         return value
+
 
 GetDIDVerkeyResponse.update_forward_refs()

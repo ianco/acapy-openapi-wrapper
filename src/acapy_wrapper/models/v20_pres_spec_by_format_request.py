@@ -27,4 +27,5 @@ class V20PresSpecByFormatRequest(BaseModel):
     indy: Optional[IndyPresSpec] = None
     trace: Optional[bool] = None
 
+
 V20PresSpecByFormatRequest.update_forward_refs()

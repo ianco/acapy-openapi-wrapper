@@ -28,4 +28,5 @@ class V20CredExRecordDetail(BaseModel):
     indy: Optional[V20CredExRecordIndy] = None
     ld_proof: Optional[V20CredExRecordLDProof] = None
 
+
 V20CredExRecordDetail.update_forward_refs()

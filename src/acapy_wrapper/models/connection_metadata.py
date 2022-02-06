@@ -21,4 +21,5 @@ class ConnectionMetadata(BaseModel):
 
     results: Optional[Dict[str, Any]] = None
 
+
 ConnectionMetadata.update_forward_refs()

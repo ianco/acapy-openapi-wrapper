@@ -42,9 +42,7 @@ router = APIRouter()
 async def wallet_did_create_post(
     request: Request,
     body: DIDCreate = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> DIDResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -69,14 +67,26 @@ async def wallet_did_create_post(
 )
 async def wallet_did_get(
     request: Request,
-    did: str = Query(None, description="DID of interest", regex=r"^did:key:z[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+$|^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
-    key_type: str = Query(None, description="Key type to query for."),
-    method: str = Query(None, description="DID method to query for. e.g. sov to only fetch indy/sov DIDs"),
-    posture: str = Query(None, description="Whether DID is current public DID, posted to ledger but current public DID, or local to the wallet"),
-    verkey: str = Query(None, description="Verification key of interest", regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    did: str = Query(
+        None,
+        description="DID of interest",
+        regex=r"^did:key:z[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+$|^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
     ),
+    key_type: str = Query(None, description="Key type to query for."),
+    method: str = Query(
+        None,
+        description="DID method to query for. e.g. sov to only fetch indy/sov DIDs",
+    ),
+    posture: str = Query(
+        None,
+        description="Whether DID is current public DID, posted to ledger but current public DID, or local to the wallet",
+    ),
+    verkey: str = Query(
+        None,
+        description="Verification key of interest",
+        regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$",
+    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> DIDList:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -101,10 +111,12 @@ async def wallet_did_get(
 )
 async def wallet_did_local_rotate_keypair_patch(
     request: Request,
-    did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    did: str = Query(
+        None,
+        description="DID of interest",
+        regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -129,9 +141,7 @@ async def wallet_did_local_rotate_keypair_patch(
 )
 async def wallet_did_public_get(
     request: Request,
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> DIDResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -156,10 +166,12 @@ async def wallet_did_public_get(
 )
 async def wallet_did_public_post(
     request: Request,
-    did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    did: str = Query(
+        None,
+        description="DID of interest",
+        regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> DIDResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -184,10 +196,12 @@ async def wallet_did_public_post(
 )
 async def wallet_get_did_endpoint_get(
     request: Request,
-    did: str = Query(None, description="DID of interest", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    did: str = Query(
+        None,
+        description="DID of interest",
+        regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> DIDEndpoint:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -213,9 +227,7 @@ async def wallet_get_did_endpoint_get(
 async def wallet_set_did_endpoint_post(
     request: Request,
     body: DIDEndpointWithType = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> dict:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

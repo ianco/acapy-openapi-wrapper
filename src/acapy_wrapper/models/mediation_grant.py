@@ -27,4 +27,5 @@ class MediationGrant(BaseModel):
     endpoint: Optional[str] = None
     routing_keys: Optional[List[str]] = None
 
+
 MediationGrant.update_forward_refs()

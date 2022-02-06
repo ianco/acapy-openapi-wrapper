@@ -25,4 +25,5 @@ class AMLRecord(BaseModel):
     aml_context: Optional[str] = None
     version: Optional[str] = None
 
+
 AMLRecord.update_forward_refs()

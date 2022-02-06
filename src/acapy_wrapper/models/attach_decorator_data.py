@@ -49,4 +49,5 @@ class AttachDecoratorData(BaseModel):
         assert value is not None and re.match(r"^[a-fA-F0-9+\/]{64}$", value)
         return value
 
+
 AttachDecoratorData.update_forward_refs()

@@ -22,4 +22,5 @@ class CredRevRecordResult(BaseModel):
 
     result: Optional[IssuerCredRevRecord] = None
 
+
 CredRevRecordResult.update_forward_refs()

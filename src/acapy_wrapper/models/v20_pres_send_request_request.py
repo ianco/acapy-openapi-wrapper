@@ -28,4 +28,5 @@ class V20PresSendRequestRequest(BaseModel):
     presentation_request: V20PresRequestByFormat
     trace: Optional[bool] = None
 
+
 V20PresSendRequestRequest.update_forward_refs()

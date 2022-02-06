@@ -21,4 +21,5 @@ class AttributeMimeTypesResult(BaseModel):
 
     results: Optional[Dict[str, str]] = None
 
+
 AttributeMimeTypesResult.update_forward_refs()

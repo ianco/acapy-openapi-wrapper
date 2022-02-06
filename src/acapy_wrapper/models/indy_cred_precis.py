@@ -27,4 +27,5 @@ class IndyCredPrecis(BaseModel):
     interval: Optional[IndyNonRevocationInterval] = None
     presentation_referents: Optional[List[str]] = None
 
+
 IndyCredPrecis.update_forward_refs()

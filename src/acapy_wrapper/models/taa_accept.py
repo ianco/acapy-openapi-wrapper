@@ -25,4 +25,5 @@ class TAAAccept(BaseModel):
     text: Optional[str] = None
     version: Optional[str] = None
 
+
 TAAAccept.update_forward_refs()

@@ -23,4 +23,5 @@ class TransactionJobs(BaseModel):
     transaction_my_job: Optional[str] = None
     transaction_their_job: Optional[str] = None
 
+
 TransactionJobs.update_forward_refs()

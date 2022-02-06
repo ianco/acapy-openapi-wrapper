@@ -24,4 +24,5 @@ class Doc(BaseModel):
     credential: Dict[str, Any]
     options: SignatureOptions
 
+
 Doc.update_forward_refs()

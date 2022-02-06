@@ -25,7 +25,11 @@ class KeylistUpdateRule(BaseModel):
 
     @validator("recipient_key")
     def recipient_key_pattern(cls, value):
-        assert value is not None and re.match(r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$", value)
+        assert value is not None and re.match(
+            r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{43,44}$",
+            value,
+        )
         return value
+
 
 KeylistUpdateRule.update_forward_refs()

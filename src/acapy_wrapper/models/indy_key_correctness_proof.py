@@ -35,4 +35,5 @@ class IndyKeyCorrectnessProof(BaseModel):
         assert value is not None and re.match(r"^[0-9]*$", value)
         return value
 
+
 IndyKeyCorrectnessProof.update_forward_refs()

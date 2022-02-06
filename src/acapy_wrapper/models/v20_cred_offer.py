@@ -36,4 +36,5 @@ class V20CredOffer(BaseModel):
     offersattach: List[AttachDecorator]
     replacement_id: Optional[str] = None
 
+
 V20CredOffer.update_forward_refs()

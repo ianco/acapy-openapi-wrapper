@@ -32,4 +32,5 @@ class InvitationMessage(BaseModel):
     requestsattach: Optional[List[AttachDecorator]] = None
     services: Optional[List[dict]] = None
 
+
 InvitationMessage.update_forward_refs()

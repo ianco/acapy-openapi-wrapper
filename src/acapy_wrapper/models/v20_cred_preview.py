@@ -24,4 +24,5 @@ class V20CredPreview(BaseModel):
     type: Optional[str] = None
     attributes: List[V20CredAttrSpec]
 
+
 V20CredPreview.update_forward_refs()

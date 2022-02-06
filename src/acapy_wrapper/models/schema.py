@@ -33,7 +33,10 @@ class Schema(BaseModel):
 
     @validator("id")
     def id_pattern(cls, value):
-        assert value is not None and re.match(r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$", value)
+        assert value is not None and re.match(
+            r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$",
+            value,
+        )
         return value
 
     @validator("seq_no")
@@ -50,5 +53,6 @@ class Schema(BaseModel):
     def version_pattern(cls, value):
         assert value is not None and re.match(r"^[0-9.]+$", value)
         return value
+
 
 Schema.update_forward_refs()

@@ -22,4 +22,5 @@ class CredInfoList(BaseModel):
 
     results: Optional[List[IndyCredInfo]] = None
 
+
 CredInfoList.update_forward_refs()

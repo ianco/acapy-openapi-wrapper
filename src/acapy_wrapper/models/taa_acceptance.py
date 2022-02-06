@@ -33,4 +33,5 @@ class TAAAcceptance(BaseModel):
         assert value >= 0
         return value
 
+
 TAAAcceptance.update_forward_refs()

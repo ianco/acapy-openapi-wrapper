@@ -25,4 +25,5 @@ class CredAttrSpec(BaseModel):
     name: str
     value: str
 
+
 CredAttrSpec.update_forward_refs()

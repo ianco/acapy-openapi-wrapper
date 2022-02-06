@@ -21,4 +21,5 @@ class AdminStatusReadiness(BaseModel):
 
     ready: Optional[bool] = None
 
+
 AdminStatusReadiness.update_forward_refs()

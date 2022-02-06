@@ -23,4 +23,5 @@ class VerifyResponse(BaseModel):
     error: Optional[str] = None
     valid: bool
 
+
 VerifyResponse.update_forward_refs()

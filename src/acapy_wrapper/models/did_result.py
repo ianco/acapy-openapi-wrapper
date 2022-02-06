@@ -22,4 +22,5 @@ class DIDResult(BaseModel):
 
     result: Optional[DID] = None
 
+
 DIDResult.update_forward_refs()

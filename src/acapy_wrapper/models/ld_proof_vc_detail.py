@@ -25,4 +25,5 @@ class LDProofVCDetail(BaseModel):
     credential: Credential
     options: LDProofVCDetailOptions
 
+
 LDProofVCDetail.update_forward_refs()

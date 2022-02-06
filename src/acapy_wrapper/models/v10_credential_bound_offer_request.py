@@ -22,4 +22,5 @@ class V10CredentialBoundOfferRequest(BaseModel):
 
     counter_proposal: Optional[CredentialProposal] = None
 
+
 V10CredentialBoundOfferRequest.update_forward_refs()

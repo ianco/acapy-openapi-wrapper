@@ -23,4 +23,5 @@ class IndyProofProofAggregatedProof(BaseModel):
     c_hash: Optional[str] = None
     c_list: Optional[List[List[int]]] = None
 
+
 IndyProofProofAggregatedProof.update_forward_refs()

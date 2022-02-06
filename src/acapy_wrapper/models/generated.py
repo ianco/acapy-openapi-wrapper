@@ -40,4 +40,5 @@ class Generated(BaseModel):
         assert value is not None and re.match(r"^[0-9]*$", value)
         return value
 
+
 Generated.update_forward_refs()

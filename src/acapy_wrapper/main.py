@@ -15,13 +15,21 @@ from fastapi import FastAPI
 from acapy_wrapper.apis.action_menu_api import router as ActionMenuApiRouter
 from acapy_wrapper.apis.basicmessage_api import router as BasicmessageApiRouter
 from acapy_wrapper.apis.connection_api import router as ConnectionApiRouter
-from acapy_wrapper.apis.credential_definition_api import router as CredentialDefinitionApiRouter
+from acapy_wrapper.apis.credential_definition_api import (
+    router as CredentialDefinitionApiRouter,
+)
 from acapy_wrapper.apis.credentials_api import router as CredentialsApiRouter
 from acapy_wrapper.apis.did_exchange_api import router as DidExchangeApiRouter
-from acapy_wrapper.apis.endorse_transaction_api import router as EndorseTransactionApiRouter
+from acapy_wrapper.apis.endorse_transaction_api import (
+    router as EndorseTransactionApiRouter,
+)
 from acapy_wrapper.apis.introduction_api import router as IntroductionApiRouter
-from acapy_wrapper.apis.issue_credential_v1_0_api import router as IssueCredentialV10ApiRouter
-from acapy_wrapper.apis.issue_credential_v2_0_api import router as IssueCredentialV20ApiRouter
+from acapy_wrapper.apis.issue_credential_v1_0_api import (
+    router as IssueCredentialV10ApiRouter,
+)
+from acapy_wrapper.apis.issue_credential_v2_0_api import (
+    router as IssueCredentialV20ApiRouter,
+)
 from acapy_wrapper.apis.jsonld_api import router as JsonldApiRouter
 from acapy_wrapper.apis.ledger_api import router as LedgerApiRouter
 from acapy_wrapper.apis.mediation_api import router as MediationApiRouter

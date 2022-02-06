@@ -21,4 +21,5 @@ class IndyRevRegDefValuePublicKeysAccumKey(BaseModel):
 
     z: Optional[str] = None
 
+
 IndyRevRegDefValuePublicKeysAccumKey.update_forward_refs()

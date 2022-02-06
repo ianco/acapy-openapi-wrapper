@@ -25,4 +25,5 @@ class IndyRevRegEntryValue(BaseModel):
     prev_accum: Optional[str] = None
     revoked: Optional[List[int]] = None
 
+
 IndyRevRegEntryValue.update_forward_refs()

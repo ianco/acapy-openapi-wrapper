@@ -8,7 +8,9 @@ from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
 from acapy_wrapper.models.constraints import Constraints
-from acapy_wrapper.models.schemas_input_descriptor_filter import SchemasInputDescriptorFilter
+from acapy_wrapper.models.schemas_input_descriptor_filter import (
+    SchemasInputDescriptorFilter,
+)
 
 
 def schema_field(string: str) -> str:

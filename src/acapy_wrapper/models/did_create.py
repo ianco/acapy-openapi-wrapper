@@ -24,4 +24,5 @@ class DIDCreate(BaseModel):
     method: Optional[str] = None
     options: Optional[DIDCreateOptions] = None
 
+
 DIDCreate.update_forward_refs()

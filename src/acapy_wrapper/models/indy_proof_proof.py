@@ -7,7 +7,9 @@ import re  # noqa: F401
 from typing import Any, Dict, List, Optional  # noqa: F401
 
 from pydantic import AnyUrl, BaseModel, EmailStr, validator  # noqa: F401
-from acapy_wrapper.models.indy_proof_proof_aggregated_proof import IndyProofProofAggregatedProof
+from acapy_wrapper.models.indy_proof_proof_aggregated_proof import (
+    IndyProofProofAggregatedProof,
+)
 from acapy_wrapper.models.indy_proof_proof_proofs_proof import IndyProofProofProofsProof
 
 
@@ -24,5 +26,6 @@ class IndyProofProof(BaseModel):
 
     aggregated_proof: Optional[IndyProofProofAggregatedProof] = None
     proofs: Optional[List[IndyProofProofProofsProof]] = None
+
 
 IndyProofProof.update_forward_refs()

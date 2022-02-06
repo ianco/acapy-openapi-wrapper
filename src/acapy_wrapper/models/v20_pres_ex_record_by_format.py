@@ -25,4 +25,5 @@ class V20PresExRecordByFormat(BaseModel):
     pres_proposal: Optional[Dict[str, Any]] = None
     pres_request: Optional[Dict[str, Any]] = None
 
+
 V20PresExRecordByFormat.update_forward_refs()

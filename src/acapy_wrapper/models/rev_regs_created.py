@@ -21,4 +21,5 @@ class RevRegsCreated(BaseModel):
 
     rev_reg_ids: Optional[List[str]] = None
 
+
 RevRegsCreated.update_forward_refs()

@@ -23,4 +23,5 @@ class IndyNonRevocProof(BaseModel):
     c_list: Optional[Dict[str, str]] = None
     x_list: Optional[Dict[str, str]] = None
 
+
 IndyNonRevocProof.update_forward_refs()

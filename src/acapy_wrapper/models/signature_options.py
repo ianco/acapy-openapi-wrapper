@@ -29,4 +29,5 @@ class SignatureOptions(BaseModel):
     type: Optional[str] = None
     verification_method: str
 
+
 SignatureOptions.update_forward_refs()

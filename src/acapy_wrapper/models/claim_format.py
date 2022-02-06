@@ -31,4 +31,5 @@ class ClaimFormat(BaseModel):
     ldp_vc: Optional[Dict[str, Any]] = None
     ldp_vp: Optional[Dict[str, Any]] = None
 
+
 ClaimFormat.update_forward_refs()

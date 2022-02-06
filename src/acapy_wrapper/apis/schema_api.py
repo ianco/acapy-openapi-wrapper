@@ -40,13 +40,19 @@ router = APIRouter()
 )
 async def schemas_created_get(
     request: Request,
-    schema_id: str = Query(None, description="Schema identifier", regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$"),
-    schema_issuer_did: str = Query(None, description="Schema issuer DID", regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$"),
+    schema_id: str = Query(
+        None,
+        description="Schema identifier",
+        regex=r"^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$",
+    ),
+    schema_issuer_did: str = Query(
+        None,
+        description="Schema issuer DID",
+        regex=r"^(did:sov:)?[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}$",
+    ),
     schema_name: str = Query(None, description="Schema name"),
     schema_version: str = Query(None, description="Schema version", regex=r"^[0-9.]+$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
-    ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> SchemasCreatedResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -72,11 +78,11 @@ async def schemas_created_get(
 async def schemas_post(
     request: Request,
     conn_id: str = Query(None, description="Connection identifier"),
-    create_transaction_for_endorser: bool = Query(None, description="Create Transaction For Endorser&#39;s signature"),
-    body: SchemaSendRequest = Body(None, description=""),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    create_transaction_for_endorser: bool = Query(
+        None, description="Create Transaction For Endorser&#39;s signature"
     ),
+    body: SchemaSendRequest = Body(None, description=""),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> TxnOrSchemaSendResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -101,10 +107,12 @@ async def schemas_post(
 )
 async def schemas_schema_id_get(
     request: Request,
-    schema_id: str = Path(None, description="Schema identifier", regex=r"^[1-9][0-9]*|[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    schema_id: str = Path(
+        None,
+        description="Schema identifier",
+        regex=r"^[1-9][0-9]*|[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> SchemaGetResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(
@@ -129,10 +137,12 @@ async def schemas_schema_id_get(
 )
 async def schemas_schema_id_write_record_post(
     request: Request,
-    schema_id: str = Path(None, description="Schema identifier", regex=r"^[1-9][0-9]*|[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$"),
-    token_AuthorizationHeader: TokenModel = Security(
-        get_token_AuthorizationHeader
+    schema_id: str = Path(
+        None,
+        description="Schema identifier",
+        regex=r"^[1-9][0-9]*|[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+$",
     ),
+    token_AuthorizationHeader: TokenModel = Security(get_token_AuthorizationHeader),
 ) -> SchemaGetResult:
     body = await request.body()
     resp_text = await au.acapy_admin_request(

@@ -23,4 +23,5 @@ class SignResponse(BaseModel):
     error: Optional[str] = None
     signed_doc: Optional[Dict[str, Any]] = None
 
+
 SignResponse.update_forward_refs()

@@ -23,4 +23,5 @@ class MediationCreateRequest(BaseModel):
     mediator_terms: Optional[List[str]] = None
     recipient_terms: Optional[List[str]] = None
 
+
 MediationCreateRequest.update_forward_refs()

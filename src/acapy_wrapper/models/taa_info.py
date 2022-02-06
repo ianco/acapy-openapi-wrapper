@@ -30,4 +30,5 @@ class TAAInfo(BaseModel):
     taa_record: Optional[TAARecord] = None
     taa_required: Optional[bool] = None
 
+
 TAAInfo.update_forward_refs()

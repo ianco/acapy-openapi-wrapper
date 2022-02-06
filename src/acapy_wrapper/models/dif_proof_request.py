@@ -25,4 +25,5 @@ class DIFProofRequest(BaseModel):
     options: Optional[DIFOptions] = None
     presentation_definition: PresentationDefinition
 
+
 DIFProofRequest.update_forward_refs()

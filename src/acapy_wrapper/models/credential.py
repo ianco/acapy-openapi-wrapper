@@ -38,7 +38,10 @@ class Credential(BaseModel):
 
     @validator("expiration_date")
     def expiration_date_pattern(cls, value):
-        assert value is not None and re.match(r"^([0-9]{4})-([0-9]{2})-([0-9]{2})([Tt ]([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?)?(([Zz]|([+-])([0-9]{2}):([0-9]{2})))?$", value)
+        assert value is not None and re.match(
+            r"^([0-9]{4})-([0-9]{2})-([0-9]{2})([Tt ]([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?)?(([Zz]|([+-])([0-9]{2}):([0-9]{2})))?$",
+            value,
+        )
         return value
 
     @validator("id")
@@ -48,7 +51,11 @@ class Credential(BaseModel):
 
     @validator("issuance_date")
     def issuance_date_pattern(cls, value):
-        assert value is not None and re.match(r"^([0-9]{4})-([0-9]{2})-([0-9]{2})([Tt ]([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?)?(([Zz]|([+-])([0-9]{2}):([0-9]{2})))?$", value)
+        assert value is not None and re.match(
+            r"^([0-9]{4})-([0-9]{2})-([0-9]{2})([Tt ]([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?)?(([Zz]|([+-])([0-9]{2}):([0-9]{2})))?$",
+            value,
+        )
         return value
+
 
 Credential.update_forward_refs()

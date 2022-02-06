@@ -31,4 +31,5 @@ class V20CredRequest(BaseModel):
     formats: List[V20CredFormat]
     requestsattach: List[AttachDecorator]
 
+
 V20CredRequest.update_forward_refs()

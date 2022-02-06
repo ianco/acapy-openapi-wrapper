@@ -35,4 +35,5 @@ class SubmissionRequirements(BaseModel):
     purpose: Optional[str] = None
     rule: Optional[str] = None
 
+
 SubmissionRequirements.update_forward_refs()

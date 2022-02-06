@@ -31,4 +31,5 @@ class SchemaGetResult(BaseModel):
     class Config:
         alias_generator = schema_field
 
+
 SchemaGetResult.update_forward_refs()

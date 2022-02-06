@@ -22,4 +22,5 @@ class V10CredentialExchangeListResult(BaseModel):
 
     results: Optional[List[V10CredentialExchange]] = None
 
+
 V10CredentialExchangeListResult.update_forward_refs()

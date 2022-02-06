@@ -50,4 +50,5 @@ class CredDefValuePrimary(BaseModel):
         assert value is not None and re.match(r"^[0-9]*$", value)
         return value
 
+
 CredDefValuePrimary.update_forward_refs()

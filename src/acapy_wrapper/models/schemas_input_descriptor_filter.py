@@ -24,4 +24,5 @@ class SchemasInputDescriptorFilter(BaseModel):
     oneof_filter: Optional[bool] = None
     uri_groups: Optional[List[List[SchemaInputDescriptor]]] = None
 
+
 SchemasInputDescriptorFilter.update_forward_refs()

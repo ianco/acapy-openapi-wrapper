@@ -24,4 +24,5 @@ class IndyProofRequestedProofRevealedAttrGroup(BaseModel):
     sub_proof_index: Optional[int] = None
     values: Optional[Dict[str, RawEncoded]] = None
 
+
 IndyProofRequestedProofRevealedAttrGroup.update_forward_refs()

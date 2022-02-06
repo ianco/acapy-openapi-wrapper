@@ -53,4 +53,5 @@ class IndyProofRequestNonRevoked(BaseModel):
         assert value >= 0
         return value
 
+
 IndyProofRequestNonRevoked.update_forward_refs()

@@ -23,4 +23,5 @@ class V20PresFormat(BaseModel):
     attach_id: str
     format: str
 
+
 V20PresFormat.update_forward_refs()

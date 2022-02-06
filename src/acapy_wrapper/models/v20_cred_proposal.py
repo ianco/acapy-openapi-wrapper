@@ -34,4 +34,5 @@ class V20CredProposal(BaseModel):
     filtersattach: List[AttachDecorator]
     formats: List[V20CredFormat]
 
+
 V20CredProposal.update_forward_refs()

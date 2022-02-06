@@ -25,4 +25,5 @@ class TxnOrSchemaSendResult(BaseModel):
     sent: Optional[SchemaSendResult] = None
     txn: Optional[TransactionRecord] = None
 
+
 TxnOrSchemaSendResult.update_forward_refs()

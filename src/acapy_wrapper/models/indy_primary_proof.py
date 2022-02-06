@@ -25,4 +25,5 @@ class IndyPrimaryProof(BaseModel):
     eq_proof: Optional[IndyEQProof] = None
     ge_proofs: Optional[List[IndyGEProof]] = None
 
+
 IndyPrimaryProof.update_forward_refs()

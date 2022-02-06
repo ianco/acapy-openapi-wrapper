@@ -30,4 +30,5 @@ class DIFField(BaseModel):
     predicate: Optional[str] = None
     purpose: Optional[str] = None
 
+
 DIFField.update_forward_refs()

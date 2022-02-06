@@ -36,7 +36,11 @@ class InvitationCreateRequest(BaseModel):
 
     @validator("mediation_id")
     def mediation_id_pattern(cls, value):
-        assert value is not None and re.match(r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", value)
+        assert value is not None and re.match(
+            r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
+            value,
+        )
         return value
+
 
 InvitationCreateRequest.update_forward_refs()

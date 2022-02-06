@@ -23,4 +23,5 @@ class ResolutionResult(BaseModel):
     did_doc: Dict[str, Any]
     metadata: Dict[str, Any]
 
+
 ResolutionResult.update_forward_refs()

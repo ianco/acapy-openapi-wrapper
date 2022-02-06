@@ -21,4 +21,5 @@ class KeylistQueryFilterRequest(BaseModel):
 
     filter: Optional[Dict[str, Any]] = None
 
+
 KeylistQueryFilterRequest.update_forward_refs()
