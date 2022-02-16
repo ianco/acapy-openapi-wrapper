@@ -778,6 +778,136 @@
             },
             "type": "object"
         },
+        "CreateWalletRequest": {
+            "properties": {
+                "image_url": {
+                    "description": "Image url for this wallet. This image url is publicized            (self-attested) to other agents as part of forming a connection.",
+                    "example": "https://aries.ca/images/sample.png",
+                    "type": "string"
+                },
+                "key_management_mode": {
+                    "description": "Key management method to use for this wallet.",
+                    "enum": [
+                        "managed"
+                    ],
+                    "example": "managed",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "Label for this wallet. This label is publicized            (self-attested) to other agents as part of forming a connection.",
+                    "example": "Alice",
+                    "type": "string"
+                },
+                "wallet_dispatch_type": {
+                    "description": "Webhook target dispatch type for this wallet.             default - Dispatch only to webhooks associated with this wallet.             base - Dispatch only to webhooks associated with the base wallet.             both - Dispatch to both webhook targets.",
+                    "enum": [
+                        "default",
+                        "both",
+                        "base"
+                    ],
+                    "example": "default",
+                    "type": "string"
+                },
+                "wallet_key": {
+                    "description": "Master key used for key derivation.",
+                    "example": "MySecretKey123",
+                    "type": "string"
+                },
+                "wallet_name": {
+                    "description": "Wallet name",
+                    "example": "MyNewWallet",
+                    "type": "string"
+                },
+                "wallet_type": {
+                    "description": "Type of the wallet to create",
+                    "enum": [
+                        "askar",
+                        "in_memory",
+                        "indy"
+                    ],
+                    "example": "indy",
+                    "type": "string"
+                },
+                "wallet_webhook_urls": {
+                    "description": "List of Webhook URLs associated with this subwallet",
+                    "items": {
+                        "description": "Optional webhook URL to receive webhook messages",
+                        "example": "http://localhost:8022/webhooks",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "CreateWalletResponse": {
+            "properties": {
+                "created_at": {
+                    "description": "Time of record creation",
+                    "example": "2021-12-31T23:59:59Z",
+                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
+                    "type": "string"
+                },
+                "key_management_mode": {
+                    "description": "Mode regarding management of wallet key",
+                    "enum": [
+                        "managed",
+                        "unmanaged"
+                    ],
+                    "type": "string"
+                },
+                "settings": {
+                    "description": "Settings for this wallet.",
+                    "type": "object"
+                },
+                "state": {
+                    "description": "Current record state",
+                    "example": "active",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "Authorization token to authenticate wallet requests",
+                    "example": "eyJhbGciOiJFZERTQSJ9.eyJhIjogIjAifQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "description": "Time of last record update",
+                    "example": "2021-12-31T23:59:59Z",
+                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
+                    "type": "string"
+                },
+                "wallet_id": {
+                    "description": "Wallet record ID",
+                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "key_management_mode",
+                "wallet_id"
+            ],
+            "type": "object"
+        },
+        "CreateWalletTokenRequest": {
+            "properties": {
+                "wallet_key": {
+                    "description": "Master key used for key derivation. Only required for             unamanged wallets.",
+                    "example": "MySecretKey123",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CreateWalletTokenResponse": {
+            "properties": {
+                "token": {
+                    "description": "Authorization token to authenticate wallet requests",
+                    "example": "eyJhbGciOiJFZERTQSJ9.eyJhIjogIjAifQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "CredAttrSpec": {
             "properties": {
                 "mime-type": {
@@ -1572,56 +1702,6 @@
             },
             "required": [
                 "expires_time"
-            ],
-            "type": "object"
-        },
-        "Disclose": {
-            "properties": {
-                "@id": {
-                    "description": "Message identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "@type": {
-                    "description": "Message type",
-                    "example": "https://didcomm.org/my-family/1.0/my-message-type",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "protocols": {
-                    "description": "List of protocol descriptors",
-                    "items": {
-                        "$ref": "#/definitions/ProtocolDescriptor"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "protocols"
-            ],
-            "type": "object"
-        },
-        "Disclosures": {
-            "properties": {
-                "@id": {
-                    "description": "Message identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "@type": {
-                    "description": "Message type",
-                    "example": "https://didcomm.org/my-family/1.0/my-message-type",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "disclosures": {
-                    "description": "List of protocol or goal_code descriptors",
-                    "items": {},
-                    "type": "array"
-                }
-            },
-            "required": [
-                "disclosures"
             ],
             "type": "object"
         },
@@ -3564,45 +3644,6 @@
             ],
             "type": "object"
         },
-        "LedgerConfigInstance": {
-            "properties": {
-                "genesis_file": {
-                    "description": "genesis_file",
-                    "type": "string"
-                },
-                "genesis_transactions": {
-                    "description": "genesis_transactions",
-                    "type": "string"
-                },
-                "genesis_url": {
-                    "description": "genesis_url",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "ledger_id",
-                    "type": "string"
-                },
-                "is_production": {
-                    "description": "is_production",
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
-        "LedgerConfigList": {
-            "properties": {
-                "ledger_config_list": {
-                    "items": {
-                        "$ref": "#/definitions/LedgerConfigInstance"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "ledger_config_list"
-            ],
-            "type": "object"
-        },
         "LedgerModulesResult": {
             "properties": {},
             "type": "object"
@@ -3984,6 +4025,10 @@
             ],
             "type": "object"
         },
+        "MultitenantModuleResponse": {
+            "properties": {},
+            "type": "object"
+        },
         "PerformRequest": {
             "properties": {
                 "name": {
@@ -4112,27 +4157,6 @@
             ],
             "type": "object"
         },
-        "ProtocolDescriptor": {
-            "properties": {
-                "pid": {
-                    "type": "string"
-                },
-                "roles": {
-                    "description": "List of roles",
-                    "items": {
-                        "description": "Role: requester or responder",
-                        "example": "requester",
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "x-nullable": true
-                }
-            },
-            "required": [
-                "pid"
-            ],
-            "type": "object"
-        },
         "PublishRevocations": {
             "properties": {
                 "rrid2crid": {
@@ -4151,73 +4175,17 @@
             },
             "type": "object"
         },
-        "Queries": {
+        "QueryResult": {
             "properties": {
-                "@id": {
-                    "description": "Message identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "@type": {
-                    "description": "Message type",
-                    "example": "https://didcomm.org/my-family/1.0/my-message-type",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "queries": {
-                    "items": {
-                        "$ref": "#/definitions/QueryItem"
+                "results": {
+                    "additionalProperties": {
+                        "description": "Protocol descriptor",
+                        "type": "object"
                     },
-                    "type": "array"
+                    "description": "Query results keyed by protocol",
+                    "type": "object"
                 }
             },
-            "type": "object"
-        },
-        "Query": {
-            "properties": {
-                "@id": {
-                    "description": "Message identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "@type": {
-                    "description": "Message type",
-                    "example": "https://didcomm.org/my-family/1.0/my-message-type",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "comment": {
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "query": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "query"
-            ],
-            "type": "object"
-        },
-        "QueryItem": {
-            "properties": {
-                "feature-type": {
-                    "description": "feature type",
-                    "enum": [
-                        "protocol",
-                        "goal-code"
-                    ],
-                    "type": "string"
-                },
-                "match": {
-                    "description": "match",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "feature-type",
-                "match"
-            ],
             "type": "object"
         },
         "RawEncoded": {
@@ -4300,6 +4268,16 @@
                     "description": "Success of nym registration operation",
                     "example": true,
                     "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "RemoveWalletRequest": {
+            "properties": {
+                "wallet_key": {
+                    "description": "Master key used for key derivation. Only required for             unmanaged wallets.",
+                    "example": "MySecretKey123",
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -4394,16 +4372,6 @@
         },
         "RevokeRequest": {
             "properties": {
-                "comment": {
-                    "description": "Optional comment to include in revocation notification",
-                    "type": "string"
-                },
-                "connection_id": {
-                    "description": "Connection ID to which the revocation notification will be sent; required if notify is true",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
-                    "type": "string"
-                },
                 "cred_ex_id": {
                     "description": "Credential exchange identifier",
                     "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -4416,10 +4384,6 @@
                     "pattern": "^[1-9][0-9]*$",
                     "type": "string"
                 },
-                "notify": {
-                    "description": "Send a notification to the credential recipient",
-                    "type": "boolean"
-                },
                 "publish": {
                     "description": "(True) publish revocation to ledger immediately, or (default, False) mark it pending",
                     "type": "boolean"
@@ -4428,10 +4392,6 @@
                     "description": "Revocation registry identifier",
                     "example": "WgWxqztrNooG92RXvxSTWv:4:WgWxqztrNooG92RXvxSTWv:3:CL:20:tag:CL_ACCUM:0",
                     "pattern": "^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):4:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+))(:.+)?:CL_ACCUM:(.+$)",
-                    "type": "string"
-                },
-                "thread_id": {
-                    "description": "Thread ID of the credential exchange message thread resulting in the credential now being revoked; required if notify is true",
                     "type": "string"
                 }
             },
@@ -4940,11 +4900,11 @@
                 "signature_request": {
                     "items": {
                         "example": {
-                            "author_goal_code": "aries.transaction.ledger.write",
+                            "author_goal_code": "transaction.ledger.write",
                             "context": "did:sov",
                             "method": "add-signature",
                             "signature_type": "<requested signature type>",
-                            "signer_goal_code": "aries.transaction.endorse"
+                            "signer_goal_code": "transaction.endorse"
                         },
                         "type": "object"
                     },
@@ -4956,7 +4916,7 @@
                             "context": "did:sov",
                             "message_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
                             "method": "add-signature",
-                            "signer_goal_code": "aries.transaction.refuse"
+                            "signer_goal_code": "transaction.refuse"
                         },
                         "type": "object"
                     },
@@ -5061,6 +5021,40 @@
                         }
                     ],
                     "description": "Schema transaction to endorse"
+                }
+            },
+            "type": "object"
+        },
+        "UpdateWalletRequest": {
+            "properties": {
+                "image_url": {
+                    "description": "Image url for this wallet. This image url is publicized            (self-attested) to other agents as part of forming a connection.",
+                    "example": "https://aries.ca/images/sample.png",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "Label for this wallet. This label is publicized            (self-attested) to other agents as part of forming a connection.",
+                    "example": "Alice",
+                    "type": "string"
+                },
+                "wallet_dispatch_type": {
+                    "description": "Webhook target dispatch type for this wallet.             default - Dispatch only to webhooks associated with this wallet.             base - Dispatch only to webhooks associated with the base wallet.             both - Dispatch to both webhook targets.",
+                    "enum": [
+                        "default",
+                        "both",
+                        "base"
+                    ],
+                    "example": "default",
+                    "type": "string"
+                },
+                "wallet_webhook_urls": {
+                    "description": "List of Webhook URLs associated with this subwallet",
+                    "items": {
+                        "description": "Optional webhook URL to receive webhook messages",
+                        "example": "http://localhost:8022/webhooks",
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "type": "object"
@@ -5547,92 +5541,6 @@
             },
             "type": "object"
         },
-        "V10DiscoveryExchangeListResult": {
-            "properties": {
-                "results": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/V10DiscoveryRecord"
-                            }
-                        ],
-                        "description": "Discover Features v1.0 exchange record"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "V10DiscoveryExchangeResult": {
-            "properties": {
-                "results": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/V10DiscoveryRecord"
-                        }
-                    ],
-                    "description": "Discover Features v1.0 exchange record"
-                }
-            },
-            "type": "object"
-        },
-        "V10DiscoveryRecord": {
-            "properties": {
-                "connection_id": {
-                    "description": "Connection identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time of record creation",
-                    "example": "2021-12-31T23:59:59Z",
-                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
-                    "type": "string"
-                },
-                "disclose": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/Disclose"
-                        }
-                    ],
-                    "description": "Disclose message"
-                },
-                "discovery_exchange_id": {
-                    "description": "Credential exchange identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "query_msg": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/Query"
-                        }
-                    ],
-                    "description": "Query message"
-                },
-                "state": {
-                    "description": "Current record state",
-                    "example": "active",
-                    "type": "string"
-                },
-                "thread_id": {
-                    "description": "Thread identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "trace": {
-                    "description": "Record trace information, based on agent configuration",
-                    "type": "boolean"
-                },
-                "updated_at": {
-                    "description": "Time of last record update",
-                    "example": "2021-12-31T23:59:59Z",
-                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "V10PresentProofModuleResponse": {
             "properties": {},
             "type": "object"
@@ -6056,8 +5964,7 @@
                         "request-received",
                         "credential-issued",
                         "credential-received",
-                        "done",
-                        "credential-revoked"
+                        "done"
                     ],
                     "example": "done",
                     "type": "string"
@@ -6667,92 +6574,6 @@
         "V20CredStoreRequest": {
             "properties": {
                 "credential_id": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "V20DiscoveryExchangeListResult": {
-            "properties": {
-                "results": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/V20DiscoveryRecord"
-                            }
-                        ],
-                        "description": "Discover Features v2.0 exchange record"
-                    },
-                    "type": "array"
-                }
-            },
-            "type": "object"
-        },
-        "V20DiscoveryExchangeResult": {
-            "properties": {
-                "results": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/V20DiscoveryRecord"
-                        }
-                    ],
-                    "description": "Discover Features v2.0 exchange record"
-                }
-            },
-            "type": "object"
-        },
-        "V20DiscoveryRecord": {
-            "properties": {
-                "connection_id": {
-                    "description": "Connection identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "created_at": {
-                    "description": "Time of record creation",
-                    "example": "2021-12-31T23:59:59Z",
-                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
-                    "type": "string"
-                },
-                "disclosures": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/Disclosures"
-                        }
-                    ],
-                    "description": "Disclosures message"
-                },
-                "discovery_exchange_id": {
-                    "description": "Credential exchange identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "queries_msg": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/Queries"
-                        }
-                    ],
-                    "description": "Queries message"
-                },
-                "state": {
-                    "description": "Current record state",
-                    "example": "active",
-                    "type": "string"
-                },
-                "thread_id": {
-                    "description": "Thread identifier",
-                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    "type": "string"
-                },
-                "trace": {
-                    "description": "Record trace information, based on agent configuration",
-                    "type": "boolean"
-                },
-                "updated_at": {
-                    "description": "Time of last record update",
-                    "example": "2021-12-31T23:59:59Z",
-                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
                     "type": "string"
                 }
             },
@@ -7424,22 +7245,69 @@
             },
             "type": "object"
         },
+        "WalletList": {
+            "properties": {
+                "results": {
+                    "description": "List of wallet records",
+                    "items": {
+                        "$ref": "#/definitions/WalletRecord"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
         "WalletModuleResponse": {
             "properties": {},
             "type": "object"
         },
-        "WriteLedgerRequest": {
+        "WalletRecord": {
             "properties": {
-                "ledger_id": {
+                "created_at": {
+                    "description": "Time of record creation",
+                    "example": "2021-12-31T23:59:59Z",
+                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
+                    "type": "string"
+                },
+                "key_management_mode": {
+                    "description": "Mode regarding management of wallet key",
+                    "enum": [
+                        "managed",
+                        "unmanaged"
+                    ],
+                    "type": "string"
+                },
+                "settings": {
+                    "description": "Settings for this wallet.",
+                    "type": "object"
+                },
+                "state": {
+                    "description": "Current record state",
+                    "example": "active",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "description": "Time of last record update",
+                    "example": "2021-12-31T23:59:59Z",
+                    "pattern": "^\\d{4}-\\d\\d-\\d\\d[T ]\\d\\d:\\d\\d(?:\\:(?:\\d\\d(?:\\.\\d{1,6})?))?(?:[+-]\\d\\d:?\\d\\d|Z|)$",
+                    "type": "string"
+                },
+                "wallet_id": {
+                    "description": "Wallet record ID",
+                    "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
                     "type": "string"
                 }
             },
+            "required": [
+                "key_management_mode",
+                "wallet_id"
+            ],
             "type": "object"
         }
     },
     "info": {
-        "title": "Endorser Agent",
-        "version": "v0.7.3"
+        "title": "Aries Cloud Agent",
+        "version": "v0.7.2"
     },
     "paths": {
         "/action-menu/{conn_id}/close": {
@@ -7647,15 +7515,15 @@
                     {
                         "description": "Connection state",
                         "enum": [
-                            "completed",
-                            "invitation",
                             "abandoned",
-                            "start",
                             "response",
                             "request",
+                            "completed",
                             "active",
-                            "error",
-                            "init"
+                            "invitation",
+                            "start",
+                            "init",
+                            "error"
                         ],
                         "in": "query",
                         "name": "state",
@@ -8731,14 +8599,6 @@
                         "type": "string"
                     },
                     {
-                        "description": "Alias for connection",
-                        "example": "Barry",
-                        "in": "query",
-                        "name": "alias",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "description": "Identifier for active mediation record to be used",
                         "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
                         "in": "query",
@@ -8944,102 +8804,12 @@
                 ]
             }
         },
-        "/discover-features-2.0/queries": {
+        "/features": {
             "get": {
                 "parameters": [
                     {
-                        "description": "Connection identifier, if none specified, then the query will provide features for this agent.",
-                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "in": "query",
-                        "name": "connection_id",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Goal-code feature-type query",
-                        "example": "*",
-                        "in": "query",
-                        "name": "query_goal_code",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Protocol feature-type query",
-                        "example": "*",
-                        "in": "query",
-                        "name": "query_protocol",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/V20DiscoveryExchangeResult"
-                        }
-                    }
-                },
-                "summary": "Query supported features",
-                "tags": [
-                    "discover-features v2.0"
-                ]
-            }
-        },
-        "/discover-features-2.0/records": {
-            "get": {
-                "parameters": [
-                    {
-                        "description": "Connection identifier",
-                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "in": "query",
-                        "name": "connection_id",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/V20DiscoveryExchangeListResult"
-                        }
-                    }
-                },
-                "summary": "Discover Features v2.0 records",
-                "tags": [
-                    "discover-features v2.0"
-                ]
-            }
-        },
-        "/discover-features/query": {
-            "get": {
-                "parameters": [
-                    {
-                        "description": "Comment",
-                        "example": "test",
-                        "in": "query",
-                        "name": "comment",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Connection identifier, if none specified, then the query will provide features for this agent.",
-                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "in": "query",
-                        "name": "connection_id",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "description": "Protocol feature query",
-                        "example": "*",
+                        "description": "Query",
+                        "example": "did:sov:*",
                         "in": "query",
                         "name": "query",
                         "required": false,
@@ -9053,42 +8823,13 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/V10DiscoveryExchangeResult"
+                            "$ref": "#/definitions/QueryResult"
                         }
                     }
                 },
                 "summary": "Query supported features",
                 "tags": [
-                    "discover-features"
-                ]
-            }
-        },
-        "/discover-features/records": {
-            "get": {
-                "parameters": [
-                    {
-                        "description": "Connection identifier",
-                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "in": "query",
-                        "name": "connection_id",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/V10DiscoveryExchangeListResult"
-                        }
-                    }
-                },
-                "summary": "Discover Features records",
-                "tags": [
-                    "discover-features"
+                    "server"
                 ]
             }
         },
@@ -9184,8 +8925,7 @@
                             "request-received",
                             "credential-issued",
                             "credential-received",
-                            "done",
-                            "credential-revoked"
+                            "done"
                         ],
                         "in": "query",
                         "name": "state",
@@ -9675,8 +9415,7 @@
                             "request_received",
                             "credential_issued",
                             "credential_received",
-                            "credential_acked",
-                            "credential_revoked"
+                            "credential_acked"
                         ],
                         "in": "query",
                         "name": "state",
@@ -10193,46 +9932,6 @@
                     }
                 },
                 "summary": "Get the role from the NYM registration of a public DID.",
-                "tags": [
-                    "ledger"
-                ]
-            }
-        },
-        "/ledger/multiple/config": {
-            "get": {
-                "parameters": [],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/LedgerConfigList"
-                        }
-                    }
-                },
-                "summary": "Fetch the multiple ledger configuration currently in use",
-                "tags": [
-                    "ledger"
-                ]
-            }
-        },
-        "/ledger/multiple/get-write-ledger": {
-            "get": {
-                "parameters": [],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/WriteLedgerRequest"
-                        }
-                    }
-                },
-                "summary": "Fetch the current write ledger",
                 "tags": [
                     "ledger"
                 ]
@@ -10799,6 +10498,200 @@
                 "summary": "Set default mediator",
                 "tags": [
                     "mediation"
+                ]
+            }
+        },
+        "/multitenancy/wallet": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateWalletRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CreateWalletResponse"
+                        }
+                    }
+                },
+                "summary": "Create a subwallet",
+                "tags": [
+                    "multitenancy"
+                ]
+            }
+        },
+        "/multitenancy/wallet/{wallet_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "description": "Subwallet identifier",
+                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                        "in": "path",
+                        "name": "wallet_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/WalletRecord"
+                        }
+                    }
+                },
+                "summary": "Get a single subwallet",
+                "tags": [
+                    "multitenancy"
+                ]
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateWalletRequest"
+                        }
+                    },
+                    {
+                        "description": "Subwallet identifier",
+                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                        "in": "path",
+                        "name": "wallet_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/WalletRecord"
+                        }
+                    }
+                },
+                "summary": "Update a subwallet",
+                "tags": [
+                    "multitenancy"
+                ]
+            }
+        },
+        "/multitenancy/wallet/{wallet_id}/remove": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/RemoveWalletRequest"
+                        }
+                    },
+                    {
+                        "description": "Subwallet identifier",
+                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                        "in": "path",
+                        "name": "wallet_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/MultitenantModuleResponse"
+                        }
+                    }
+                },
+                "summary": "Remove a subwallet",
+                "tags": [
+                    "multitenancy"
+                ]
+            }
+        },
+        "/multitenancy/wallet/{wallet_id}/token": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateWalletTokenRequest"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "wallet_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CreateWalletTokenResponse"
+                        }
+                    }
+                },
+                "summary": "Get auth token for a subwallet",
+                "tags": [
+                    "multitenancy"
+                ]
+            }
+        },
+        "/multitenancy/wallets": {
+            "get": {
+                "parameters": [
+                    {
+                        "description": "Wallet name",
+                        "example": "MyNewWallet",
+                        "in": "query",
+                        "name": "wallet_name",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/WalletList"
+                        }
+                    }
+                },
+                "summary": "Query subwallets",
+                "tags": [
+                    "multitenancy"
                 ]
             }
         },
@@ -13175,6 +13068,19 @@
             }
         }
     },
+    "security": [
+        {
+            "AuthorizationHeader": []
+        }
+    ],
+    "securityDefinitions": {
+        "AuthorizationHeader": {
+            "description": "Bearer token. Be sure to preprend token with 'Bearer '",
+            "in": "header",
+            "name": "Authorization",
+            "type": "apiKey"
+        }
+    },
     "swagger": "2.0",
     "tags": [
         {
@@ -13220,22 +13126,6 @@
                 "url": "https://github.com/hyperledger/aries-rfcs/tree/25464a5c8f8a17b14edaa4310393df6094ace7b0/features/0023-did-exchange"
             },
             "name": "did-exchange"
-        },
-        {
-            "description": "Feature discovery",
-            "externalDocs": {
-                "description": "Specification",
-                "url": "https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0031-discover-features"
-            },
-            "name": "discover-features"
-        },
-        {
-            "description": "Feature discovery v2",
-            "externalDocs": {
-                "description": "Specification",
-                "url": "https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2"
-            },
-            "name": "discover-features v2.0"
         },
         {
             "description": "Endorse a Transaction",
@@ -13286,6 +13176,10 @@
             "name": "mediation"
         },
         {
+            "description": "Multitenant wallet management",
+            "name": "multitenancy"
+        },
+        {
             "description": "Out-of-band connections",
             "externalDocs": {
                 "description": "Design",
@@ -13331,6 +13225,14 @@
                 "url": "https://github.com/hyperledger/indy-node/blob/master/design/anoncreds.md#schema"
             },
             "name": "schema"
+        },
+        {
+            "description": "Feature discovery",
+            "externalDocs": {
+                "description": "Specification",
+                "url": "https://github.com/hyperledger/aries-rfcs/tree/9b7ab9814f2e7d1108f74aca6f3d2e5d62899473/features/0031-discover-features"
+            },
+            "name": "server"
         },
         {
             "description": "Trust-ping over connection",
